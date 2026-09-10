@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Strava Dashboard · André Scultori</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FF6B35'/%3E%3Ctext y='.9em' font-size='72' x='12' fill='white'%3E🏃%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23FF6B35'/%3E%3Ctext y='.88em' font-size='130' x='15' fill='white'%3E🏃%3C/text%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Strava Dash">
+<meta name="theme-color" content="#FF6B35">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -69,16 +75,19 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .record-item{background:var(--surf2);border-radius:8px;padding:10px 12px;text-align:center}
 .record-dist{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px}
 .record-time{font-size:18px;font-weight:800;color:var(--yellow);letter-spacing:-.02em}
-.record-pace{font-size:10px;color:var(--dim);margin-top:2px}
+.record-pace{font-size:10px;color:var(--green);margin-top:2px;font-weight:600}
+.record-date{font-size:9px;color:var(--dim);margin-top:1px}
 
 /* META CARD */
 .meta-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px}
-.meta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.meta-title{font-size:12px;font-weight:700}
-.meta-pct{font-size:22px;font-weight:800;color:var(--orange)}
-.meta-bar-bg{background:var(--border);border-radius:6px;height:8px;margin-bottom:8px}
-.meta-bar-fill{background:linear-gradient(90deg,var(--orange),#f97316);border-radius:6px;height:8px;transition:width .6s ease}
-.meta-info{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.meta-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.meta-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.meta-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.meta-item-sport{font-size:12px;font-weight:700;color:var(--text)}
+.meta-item-pct{font-size:18px;font-weight:800}
+.meta-bar-bg{background:var(--border);border-radius:6px;height:6px;margin-bottom:6px}
+.meta-bar-fill{border-radius:6px;height:6px;transition:width .6s ease}
+.meta-info{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
 
 /* CHARTS */
 .cg1{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}
@@ -265,19 +274,11 @@ tbody td{padding:8px 13px;white-space:nowrap}
 
     <!-- META ANUAL -->
     <div class="meta-card" id="meta-card" style="display:none">
-      <div class="meta-header">
-        <div>
-          <div class="ct">🎯 Meta anual</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px" id="meta-sub"></div>
-        </div>
-        <div class="meta-pct" id="meta-pct">—%</div>
+      <div class="ch" style="margin-bottom:14px">
+        <div class="ct">🎯 Metas anuais <span id="meta-ano" style="color:var(--muted);font-weight:400"></span></div>
+        <div class="chi">configure na aba CONFIG da planilha</div>
       </div>
-      <div class="meta-bar-bg"><div class="meta-bar-fill" id="meta-bar" style="width:0%"></div></div>
-      <div class="meta-info">
-        <span id="meta-done"></span>
-        <span id="meta-left"></span>
-        <span id="meta-goal"></span>
-      </div>
+      <div id="meta-items"></div>
     </div>
 
     <!-- CHARTS ROW 1 -->
@@ -387,9 +388,19 @@ async function loadData() {
       if (rc.ok) {
         const dc = await rc.json();
         const rows = dc.values || [];
-        rows.forEach(row => {
-          if (row[0]==='META_KM' && row[1]) window._metaKm = parseFloat(row[1]);
+        window._metas = {}; // { Run: 240, Ride: 500, ... }
+        rows.slice(1).forEach(row => {
+          if (row[0] && row[1]) {
+            const sport = row[0].trim();
+            const km    = parseFloat(row[1]);
+            if (!isNaN(km) && km > 0) window._metas[sport] = km;
+          }
         });
+        // fallback legacy: se tiver META_KM usa só para Run
+        if (window._metas['META_KM']) {
+          window._metas['Run'] = window._metas['META_KM'];
+          delete window._metas['META_KM'];
+        }
       }
     } catch(e) {} // CONFIG é opcional — ignora se não existir
 
@@ -450,6 +461,7 @@ function nsp(v) {
 function fp(s)    { if(!s||s<=0||s>=3600)return'—'; return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
 function ftt(s)   { const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return`${h}h ${String(m).padStart(2,'0')}m ${String(sec).padStart(2,'0')}s`; }
 function fdur(s)  { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60); return h>0?`${h}h${m>0?' '+m+'m':''}`:m+'m'; }
+function fhms(s)  { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`; }
 // Distância sem abreviação estranha
 function fdist(km) {
   if (km >= 10000) return `${(km/1000).toFixed(1)}K`;
@@ -557,44 +569,62 @@ function rRecords() {
       if (!best) return '';
       return `<div class="record-item">
         <div class="record-dist">${best.distKm.toFixed(2)} km</div>
-        <div class="record-time" style="font-size:14px">${fdur(best.durS)}</div>
+        <div class="record-time">${fhms(best.durS)}</div>
         <div class="record-pace">${best.paceStr}/km</div>
+        <div class="record-date">${best.dStr}</div>
       </div>`;
     }
     const candidates = runs.filter(a=>a.distKm>=d.min&&a.distKm<=d.max);
-    if (!candidates.length) return `<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div></div>`;
+    if (!candidates.length) return `<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div><div class="record-pace">sem registro</div></div>`;
     best = candidates.reduce((b,a)=>a.paceS<b.paceS?a:b);
     return `<div class="record-item">
       <div class="record-dist">${d.label}</div>
-      <div class="record-time">${fdur(best.durS)}</div>
-      <div class="record-pace">${best.paceStr}/km · ${best.dStr}</div>
+      <div class="record-time">${fhms(best.durS)}</div>
+      <div class="record-pace">${best.paceStr}/km</div>
+      <div class="record-date">${best.dStr}</div>
     </div>`;
   }).join('');
 }
 
 function rMeta() {
-  // Mostra meta só quando filtrado por ano atual
   const anoAtual = new Date().getFullYear();
-  if (aY !== anoAtual) { document.getElementById('meta-card').style.display='none'; return; }
+  const metas = window._metas || {Run: 240}; // fallback padrão
+  const hoje  = new Date();
+  const fimAno = new Date(anoAtual,11,31);
+  const semanas = Math.max(1, Math.ceil((fimAno-hoje)/(7*86400000)));
 
-  const metaKm = window._metaKm || 240; // lido da aba CONFIG, fallback 240
-  const feito  = fil.filter(a=>a.sport==='Run').reduce((s,a)=>s+a.distKm,0);
-  const pct    = Math.min(100, (feito/metaKm*100)).toFixed(1);
-  const falta  = Math.max(0, metaKm - feito).toFixed(1);
-
-  // Semanas restantes no ano
-  const hoje    = new Date();
-  const fimAno  = new Date(anoAtual,11,31);
-  const semanas = Math.max(1,Math.ceil((fimAno-hoje)/(7*86400000)));
-  const porSem  = (falta/semanas).toFixed(1);
+  // Filtra apenas esportes que têm meta definida
+  const sports = Object.keys(metas);
+  if (!sports.length) { document.getElementById('meta-card').style.display='none'; return; }
 
   document.getElementById('meta-card').style.display='block';
-  document.getElementById('meta-pct').textContent = pct+'%';
-  document.getElementById('meta-sub').textContent = `Meta de corrida ${anoAtual}`;
-  document.getElementById('meta-bar').style.width = pct+'%';
-  document.getElementById('meta-done').textContent = `✅ ${feito.toFixed(1)} km feitos`;
-  document.getElementById('meta-left').textContent = `📍 ${falta} km restantes`;
-  document.getElementById('meta-goal').textContent = `🎯 Meta: ${metaKm} km`;
+  document.getElementById('meta-ano').textContent = `· ${anoAtual}`;
+
+  const metaContent = document.getElementById('meta-items');
+  metaContent.innerHTML = sports.map(sport => {
+    const metaKm = metas[sport];
+    const feito  = all.filter(a=>a.year===anoAtual && a.sport===sport).reduce((s,a)=>s+a.distKm,0);
+    const pct    = Math.min(100,(feito/metaKm*100));
+    const falta  = Math.max(0, metaKm - feito).toFixed(1);
+    const porSem = (falta/semanas).toFixed(1);
+    const icon   = {Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊'}[sport] || '🏅';
+    const cor    = {Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF'}[sport] || '#FF6B35';
+
+    return `<div class="meta-item">
+      <div class="meta-item-header">
+        <div class="meta-item-sport">${icon} ${sport}</div>
+        <div class="meta-item-pct" style="color:${cor}">${pct.toFixed(1)}%</div>
+      </div>
+      <div class="meta-bar-bg">
+        <div class="meta-bar-fill" style="width:${pct.toFixed(1)}%;background:${cor}"></div>
+      </div>
+      <div class="meta-info">
+        <span>✅ ${feito.toFixed(1)} km</span>
+        <span>📍 faltam ${falta} km</span>
+        <span>🎯 meta: ${metaKm} km</span>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function rMo() {
