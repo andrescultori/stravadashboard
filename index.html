@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,25 +13,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* ── THEMES ── */
-[data-theme="dark"] {
+:root{
   --bg:#0D1117;--surf:#161B22;--surf2:#1C2128;--border:#30363D;
-  --text:#E6EDF3;--muted:#7D8590;--dim:#4A5568;
-}
-[data-theme="light"] {
-  --bg:#F6F8FA;--surf:#FFFFFF;--surf2:#F0F2F5;--border:#D0D7DE;
-  --text:#1F2328;--muted:#656D76;--dim:#9EA7B0;
-}
-:root {
   --orange:#FF6B35;--green:#39D353;--blue:#58A6FF;--purple:#BC8CFF;
   --yellow:#F0C040;--red:#F85149;--teal:#3DCFCF;
+  --text:#E6EDF3;--muted:#7D8590;--dim:#4A5568;
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* ── TOPBAR ── */
+/* TOPBAR */
 .topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -40,13 +31,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .topbar-links{display:flex;gap:10px;margin-top:2px}
 .tl{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s}
 .tl:hover{color:var(--orange)}
-.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-right{display:flex;align-items:center;gap:10px}
 .btn-t{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s,color .15s}
 .btn-t:hover{border-color:var(--orange);color:var(--orange)}
-.btn-theme{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 9px;font-size:15px;cursor:pointer;line-height:1;transition:border-color .15s}
-.btn-theme:hover{border-color:var(--orange)}
 
-/* ── FILTERS ── */
+/* FILTERS */
 .filters-bar{background:var(--surf);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .fl{font-size:11px;color:var(--muted);font-weight:600;margin-right:2px;white-space:nowrap}
 .chip{background:var(--surf2);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:3px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
@@ -54,37 +43,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .chip.active{background:var(--orange);border-color:var(--orange);color:#fff}
 .fsep{width:1px;height:18px;background:var(--border);margin:0 4px}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{padding:20px 24px;max-width:1400px;margin:0 auto}
 
-/* ── SECTION WRAPPER (collapse) ── */
-.section{margin-bottom:16px}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.btn-collapse{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:2px 4px;line-height:1;transition:color .15s;display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600}
-.btn-collapse:hover{color:var(--orange)}
-.section-body{transition:opacity .2s}
-.section-body.hidden{display:none}
-
-/* ── LAST ACTIVITY ── */
-.last-act{background:var(--surf);border:1px solid var(--border);border-radius:12px;padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border-left:4px solid var(--orange)}
-.last-act-icon{font-size:32px}
-.last-act-name{font-size:15px;font-weight:700;margin-bottom:2px}
-.last-act-date{font-size:12px;color:var(--muted)}
-.last-act-ago{font-size:11px;color:var(--orange);font-weight:600;margin-top:2px}
-.last-act-stats{display:flex;gap:20px}
-.last-act-stat{text-align:right}
-.last-act-stat-val{font-size:18px;font-weight:800;letter-spacing:-.02em}
-.last-act-stat-lbl{font-size:10px;color:var(--muted);margin-top:1px}
-
-/* ── HERO ── */
-.hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;border-radius:14px;overflow:hidden;background:var(--border)}
+/* HERO — 3 KPIs */
+.hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-bottom:16px;border-radius:14px;overflow:hidden;background:var(--border)}
 .hkpi{background:var(--surf);padding:28px 32px;position:relative}
 .hkpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .hkpi.dist::before{background:var(--orange)}
 .hkpi.time::before{background:var(--blue)}
 .hkpi.acts::before{background:var(--green)}
-.hkpi-icon{margin-bottom:6px}
+.hkpi-icon{font-size:18px;margin-bottom:6px;opacity:.65}
 .hkpi-val{font-size:clamp(40px,5.5vw,80px);font-weight:800;letter-spacing:-.04em;line-height:1}
 .hkpi.dist .hkpi-val{color:var(--orange)}
 .hkpi.time .hkpi-val{font-size:clamp(24px,3.5vw,52px);color:var(--blue)}
@@ -93,30 +62,24 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .hkpi-lbl{font-size:12px;color:var(--muted);font-weight:500;margin-top:8px}
 .hkpi-sub{font-size:11px;color:var(--dim);margin-top:2px}
 
-/* ── KPI ROW ── */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+/* SECONDARY KPIS */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .kc{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:14px 18px}
 .kc-lbl{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:5px}
 .kc-val{font-size:26px;font-weight:800;letter-spacing:-.03em}
 .kc-sub{font-size:10px;color:var(--dim);margin-top:2px}
 
-/* ── RECORDS ── */
-.records-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+/* RECORDS CARD */
+.records-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px}
+.records-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
 .record-item{background:var(--surf2);border-radius:8px;padding:10px 12px;text-align:center}
 .record-dist{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px}
-.record-time{font-size:17px;font-weight:800;color:var(--yellow);letter-spacing:-.02em}
+.record-time{font-size:18px;font-weight:800;color:var(--yellow);letter-spacing:-.02em}
 .record-pace{font-size:10px;color:var(--green);margin-top:2px;font-weight:600}
 .record-date{font-size:9px;color:var(--dim);margin-top:1px}
 
-/* ── BEST MONTH/YEAR ── */
-.best-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.best-stat{background:var(--surf2);border-radius:8px;padding:10px 12px}
-.best-stat-label{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:3px}
-.best-stat-value{font-size:18px;font-weight:800;letter-spacing:-.02em}
-.best-stat-sub{font-size:10px;color:var(--dim);margin-top:2px}
-.best-badge{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-bottom:10px}
-
-/* ── META ── */
+/* META CARD */
+.meta-card{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:16px}
 .meta-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .meta-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
 .meta-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -126,23 +89,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .meta-bar-fill{border-radius:6px;height:6px;transition:width .6s ease}
 .meta-info{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
 
-/* ── STREAK ── */
-.streak-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.streak-card{background:var(--surf2);border-radius:10px;padding:16px 20px;text-align:center}
-.streak-num{font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1}
-.streak-lbl{font-size:12px;color:var(--muted);margin-top:6px;font-weight:500}
-.streak-sub{font-size:11px;color:var(--dim);margin-top:3px}
-
-/* ── CHARTS ── */
-.cg1{display:grid;grid-template-columns:2fr 1fr;gap:10px}
-.cg2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.cg3{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* CHARTS */
+.cg1{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}
+.cg2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.cg3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .cc{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
 .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .ct{font-size:12px;font-weight:700}
 .chi{font-size:10px;color:var(--dim)}
 
-/* ── TOP PISTAS/GEAR ── */
+/* TOP PISTAS */
+.pista-list{margin-top:4px}
 .pista-item{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)}
 .pista-item:last-child{border-bottom:none}
 .pista-name{font-size:12px;color:var(--text);font-weight:500}
@@ -150,6 +107,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .pista-runs{color:var(--muted)}
 .pista-km{color:var(--orange);font-weight:700}
 .pista-pace{color:var(--green)}
+
+/* TOP GEAR */
+.gear-list{margin-top:4px}
 .gear-item{padding:8px 0;border-bottom:1px solid var(--border)}
 .gear-item:last-child{border-bottom:none}
 .gear-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
@@ -159,8 +119,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .gear-bar-fill{background:var(--orange);border-radius:3px;height:4px}
 .gear-sub{font-size:10px;color:var(--dim);margin-top:3px}
 
-/* ── TABLE ── */
-.tcard{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+/* TABLE */
+.tcard{background:var(--surf);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px}
 .th{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border)}
 .tt{font-size:12px;font-weight:700}
 .tm{font-size:11px;color:var(--muted)}
@@ -180,40 +140,33 @@ tbody td{padding:8px 13px;white-space:nowrap}
 .sb-Walk{background:rgba(57,211,83,.15);color:var(--green)}
 .sb-Ride{background:rgba(88,166,255,.15);color:var(--blue)}
 .sb-Hike{background:rgba(188,140,255,.15);color:var(--purple)}
-.sb-Swim{background:rgba(61,207,207,.15);color:var(--teal)}
+.sb-Swim{background:rgba(64,192,192,.15);color:var(--teal)}
 .sb-WeightTraining,.sb-Workout{background:rgba(240,192,64,.15);color:var(--yellow)}
 .sl{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);border-radius:6px;color:var(--orange);text-decoration:none;font-size:12px}
 .sl:hover{background:rgba(255,107,53,.25)}
 
-/* ── PAGINATION ── */
+/* PAGINATION */
 .pg{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px}
 .pg-btn{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s}
 .pg-btn:hover:not(:disabled){border-color:var(--orange);color:var(--orange)}
 .pg-btn:disabled{opacity:.4;cursor:default}
 .pg-info{font-size:12px;color:var(--muted);min-width:200px;text-align:center}
 
-/* ── FOOTER ── */
+/* FOOTER */
 .footer{text-align:center;padding:24px;border-top:1px solid var(--border);margin-top:8px}
 .footer-text{font-size:12px;color:var(--dim)}
 .footer-text a{color:var(--muted);text-decoration:none}
 .footer-text a:hover{color:var(--orange)}
 
-/* ── LOADING ── */
+/* LOADING */
 #loading{display:flex;position:fixed;inset:0;background:rgba(13,17,23,.9);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:14px}
-[data-theme="light"] #loading{background:rgba(246,248,250,.9)}
 .sp{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .sp-t{font-size:13px;color:var(--muted)}
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:1100px){.hero{grid-template-columns:1fr 1fr}.records-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){
-  .hero{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}
-  .cg1,.cg2,.cg3{grid-template-columns:1fr}
-  .records-grid{grid-template-columns:repeat(2,1fr)}
-  .last-act{grid-template-columns:auto 1fr;gap:12px}
-  .last-act-stats{display:none}
-}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.cg1{grid-template-columns:1fr}.cg2{grid-template-columns:1fr}.cg3{grid-template-columns:1fr}.records-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.main{padding:12px}.hkpi{padding:18px 20px}.topbar{padding:10px 14px}}
 </style>
 </head>
@@ -241,7 +194,6 @@ tbody td{padding:8px 13px;white-space:nowrap}
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema">🌙</button>
       <button class="btn-t" onclick="loadData()">↻ Atualizar</button>
     </div>
   </div>
@@ -257,205 +209,140 @@ tbody td{padding:8px 13px;white-space:nowrap}
 
   <div class="main">
 
-    <!-- ÚLTIMA ATIVIDADE -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Última atividade</span>
-        <button class="btn-collapse" onclick="toggleSection('last')">👁 Ocultar</button>
+    <!-- HERO — 3 KPIs principais -->
+    <div class="hero">
+      <div class="hkpi dist">
+        <div class="hkpi-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--orange)"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </div>
+        <div><span class="hkpi-val" id="h-dist">—</span><span class="hkpi-unit">km</span></div>
+        <div class="hkpi-lbl">Distância total percorrida</div>
+        <div class="hkpi-sub" id="h-dist-sub"></div>
       </div>
-      <div class="section-body" id="sec-last">
-        <div id="last-act-card"></div>
+      <div class="hkpi time">
+        <div class="hkpi-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--blue)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="hkpi-val" id="h-time">—</div>
+        <div class="hkpi-lbl">Tempo total em movimento</div>
+        <div class="hkpi-sub" id="h-time-sub"></div>
+      </div>
+      <div class="hkpi acts">
+        <div class="hkpi-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--green)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div><span class="hkpi-val" id="h-acts">—</span></div>
+        <div class="hkpi-lbl">Atividades registradas</div>
+        <div class="hkpi-sub" id="h-acts-sub"></div>
       </div>
     </div>
 
-    <!-- HERO -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Totais</span>
-        <button class="btn-collapse" onclick="toggleSection('hero')">👁 Ocultar</button>
+    <!-- SECONDARY KPIS -->
+    <div class="kpi-row">
+      <div class="kc">
+        <div class="kc-lbl">Pace médio</div>
+        <div class="kc-val" id="k-pace" style="color:var(--green)">—</div>
+        <div class="kc-sub">min/km · corridas e caminhadas</div>
       </div>
-      <div class="section-body" id="sec-hero">
-        <div class="hero" style="margin-bottom:10px">
-          <div class="hkpi dist">
-            <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--orange)"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
-            <div><span class="hkpi-val" id="h-dist">—</span><span class="hkpi-unit">km</span></div>
-            <div class="hkpi-lbl">Distância total percorrida</div>
-            <div class="hkpi-sub" id="h-dist-sub"></div>
-          </div>
-          <div class="hkpi time">
-            <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--blue)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div class="hkpi-val" id="h-time">—</div>
-            <div class="hkpi-lbl">Tempo total em movimento</div>
-            <div class="hkpi-sub" id="h-time-sub"></div>
-          </div>
-          <div class="hkpi acts">
-            <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--green)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-            <div><span class="hkpi-val" id="h-acts">—</span></div>
-            <div class="hkpi-lbl">Atividades registradas</div>
-            <div class="hkpi-sub" id="h-acts-sub"></div>
-          </div>
-        </div>
-        <div class="kpi-row">
-          <div class="kc"><div class="kc-lbl">Pace médio</div><div class="kc-val" id="k-pace" style="color:var(--green)">—</div><div class="kc-sub">min/km · corridas e caminhadas</div></div>
-          <div class="kc"><div class="kc-lbl">Dias ativos</div><div class="kc-val" id="k-days" style="color:var(--blue)">—</div><div class="kc-sub" id="k-days-sub">dias com atividade</div></div>
-          <div class="kc"><div class="kc-lbl">Elevação</div><div class="kc-val" id="k-elev" style="color:var(--yellow)">—</div><div class="kc-sub">metros acumulados</div></div>
-          <div class="kc"><div class="kc-lbl">Calorias</div><div class="kc-val" id="k-cal" style="color:var(--purple)">—</div><div class="kc-sub">kcal queimadas</div></div>
-        </div>
+      <div class="kc">
+        <div class="kc-lbl">Dias ativos</div>
+        <div class="kc-val" id="k-days" style="color:var(--blue)">—</div>
+        <div class="kc-sub" id="k-days-sub">dias com atividade</div>
+      </div>
+      <div class="kc">
+        <div class="kc-lbl">Elevação</div>
+        <div class="kc-val" id="k-elev" style="color:var(--yellow)">—</div>
+        <div class="kc-sub">metros acumulados</div>
+      </div>
+      <div class="kc">
+        <div class="kc-lbl">Calorias</div>
+        <div class="kc-val" id="k-cal" style="color:var(--purple)">—</div>
+        <div class="kc-sub">kcal queimadas</div>
       </div>
     </div>
 
     <!-- RECORDS -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Records pessoais</span>
-        <button class="btn-collapse" onclick="toggleSection('records')">👁 Ocultar</button>
+    <div class="records-card">
+      <div class="ch">
+        <div class="ct">🏆 Records pessoais</div>
+        <div class="chi">melhores tempos por distância</div>
       </div>
-      <div class="section-body" id="sec-records">
-        <div class="cc"><div class="ch"><div class="ct">🏆 Records pessoais</div><div class="chi">melhores tempos por distância</div></div><div class="records-grid" id="records-grid"></div></div>
-      </div>
-    </div>
-
-    <!-- BEST MONTH/YEAR -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Melhores períodos</span>
-        <button class="btn-collapse" onclick="toggleSection('best')">👁 Ocultar</button>
-      </div>
-      <div class="section-body" id="sec-best">
-        <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">📅 Melhor mês</div><div class="chi" id="best-month-label"></div></div><div id="best-month-content"></div></div>
-          <div class="cc"><div class="ch"><div class="ct">📆 Melhor ano</div><div class="chi" id="best-year-label"></div></div><div id="best-year-content"></div></div>
-        </div>
+      <div class="records-grid" id="records-grid">
+        <!-- preenchido via JS -->
       </div>
     </div>
 
-    <!-- METAS -->
-    <div class="section" id="meta-section" style="display:none">
-      <div class="section-header">
-        <span class="section-title">Metas anuais <span id="meta-ano" style="font-weight:400"></span></span>
-        <button class="btn-collapse" onclick="toggleSection('meta')">👁 Ocultar</button>
+    <!-- META ANUAL -->
+    <div class="meta-card" id="meta-card" style="display:none">
+      <div class="ch" style="margin-bottom:14px">
+        <div class="ct">🎯 Metas anuais <span id="meta-ano" style="color:var(--muted);font-weight:400"></span></div>
+        <div class="chi">configure na aba CONFIG da planilha</div>
       </div>
-      <div class="section-body" id="sec-meta">
-        <div class="cc"><div class="ch"><div class="ct">🎯 Progresso</div><div class="chi">configure na aba CONFIG da planilha</div></div><div id="meta-items"></div></div>
+      <div id="meta-items"></div>
+    </div>
+
+    <!-- CHARTS ROW 1 -->
+    <div class="cg1">
+      <div class="cc">
+        <div class="ch"><div class="ct">Distância por mês (km)</div><div class="chi">clique para filtrar</div></div>
+        <div style="position:relative;height:210px"><canvas id="c-mo"></canvas></div>
+      </div>
+      <div class="cc">
+        <div class="ch"><div class="ct">Por tipo de atividade</div><div class="chi">clique para filtrar</div></div>
+        <div style="position:relative;height:210px"><canvas id="c-sp"></canvas></div>
       </div>
     </div>
 
-    <!-- STREAK -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Sequência</span>
-        <button class="btn-collapse" onclick="toggleSection('streak')">👁 Ocultar</button>
+    <!-- CHARTS ROW 2 -->
+    <div class="cg2">
+      <div class="cc">
+        <div class="ch"><div class="ct">Distância anual (km)</div><div class="chi">clique para filtrar</div></div>
+        <div style="position:relative;height:170px"><canvas id="c-an"></canvas></div>
       </div>
-      <div class="section-body" id="sec-streak">
-        <div class="streak-grid">
-          <div class="streak-card">
-            <div class="streak-num" id="streak-cur" style="color:var(--orange)">—</div>
-            <div class="streak-lbl">Sequência atual</div>
-            <div class="streak-sub" id="streak-cur-sub">dias consecutivos</div>
-          </div>
-          <div class="streak-card">
-            <div class="streak-num" id="streak-max" style="color:var(--yellow)">—</div>
-            <div class="streak-lbl">Melhor sequência</div>
-            <div class="streak-sub" id="streak-max-sub">recorde histórico</div>
-          </div>
-        </div>
+      <div class="cc">
+        <div class="ch"><div class="ct">Pace médio por ano</div></div>
+        <div style="position:relative;height:170px"><canvas id="c-pa"></canvas></div>
       </div>
-    </div>
-
-    <!-- GRÁFICOS MENSAIS -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Evolução mensal</span>
-        <button class="btn-collapse" onclick="toggleSection('monthly')">👁 Ocultar</button>
-      </div>
-      <div class="section-body" id="sec-monthly">
-        <div class="cg1">
-          <div class="cc"><div class="ch"><div class="ct">Distância por mês (km)</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-mo"></canvas></div></div>
-          <div class="cc"><div class="ch"><div class="ct">Por tipo de atividade</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-sp"></canvas></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMPARATIVO ANO A ANO -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Comparativo ano a ano</span>
-        <button class="btn-collapse" onclick="toggleSection('yoy')">👁 Ocultar</button>
-      </div>
-      <div class="section-body" id="sec-yoy">
-        <div class="cc"><div class="ch"><div class="ct">Acúmulo de km por mês (ano a ano)</div><div class="chi">compara o ritmo entre anos</div></div><div style="position:relative;height:240px"><canvas id="c-yoy"></canvas></div></div>
-      </div>
-    </div>
-
-    <!-- GRÁFICOS ANUAIS -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Análise anual</span>
-        <button class="btn-collapse" onclick="toggleSection('annual')">👁 Ocultar</button>
-      </div>
-      <div class="section-body" id="sec-annual">
-        <div class="cg2">
-          <div class="cc"><div class="ch"><div class="ct">Distância anual (km)</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:170px"><canvas id="c-an"></canvas></div></div>
-          <div class="cc"><div class="ch"><div class="ct">Pace médio por ano</div></div><div style="position:relative;height:170px"><canvas id="c-pa"></canvas></div></div>
-          <div class="cc"><div class="ch"><div class="ct">BPM médio por ano</div></div><div style="position:relative;height:170px"><canvas id="c-hr"></canvas></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HORÁRIO + PACE MENSAL -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Padrões</span>
-        <button class="btn-collapse" onclick="toggleSection('patterns')">👁 Ocultar</button>
-      </div>
-      <div class="section-body" id="sec-patterns">
-        <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">Distribuição por horário</div><div class="chi">quando você mais se exercita</div></div><div style="position:relative;height:200px"><canvas id="c-hour"></canvas></div></div>
-          <div class="cc"><div class="ch"><div class="ct">Evolução do pace mensal</div><div class="chi" id="pace-month-label">dentro do ano filtrado</div></div><div style="position:relative;height:200px"><canvas id="c-pace-mo"></canvas></div></div>
-        </div>
+      <div class="cc">
+        <div class="ch"><div class="ct">BPM médio por ano</div></div>
+        <div style="position:relative;height:170px"><canvas id="c-hr"></canvas></div>
       </div>
     </div>
 
     <!-- TOP PISTAS + GEAR -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Pistas e equipamentos</span>
-        <button class="btn-collapse" onclick="toggleSection('gear')">👁 Ocultar</button>
+    <div class="cg3">
+      <div class="cc">
+        <div class="ch"><div class="ct">📍 Top pistas</div><div class="chi">por número de corridas</div></div>
+        <div class="pista-list" id="pista-list"></div>
       </div>
-      <div class="section-body" id="sec-gear">
-        <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">📍 Top pistas</div><div class="chi">por número de corridas</div></div><div class="pista-list" id="pista-list"></div></div>
-          <div class="cc"><div class="ch"><div class="ct">👟 Top gear</div><div class="chi">por distância acumulada</div></div><div class="gear-list" id="gear-list"></div></div>
-        </div>
+      <div class="cc">
+        <div class="ch"><div class="ct">👟 Top gear</div><div class="chi">por distância acumulada</div></div>
+        <div class="gear-list" id="gear-list"></div>
       </div>
     </div>
 
     <!-- TABLE -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Registro de atividades</span>
-        <button class="btn-collapse" onclick="toggleSection('table')">👁 Ocultar</button>
+    <div class="tcard">
+      <div class="th"><div class="tt">Registro de atividades</div><div class="tm" id="t-meta"></div></div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>Data</th><th>Tipo</th><th>Nome</th><th>Dist</th><th>Tempo</th>
+            <th>Pace</th><th>BPM</th><th>Elev</th><th>Cidade</th><th>Gear</th><th>Link</th>
+          </tr></thead>
+          <tbody id="t-body"></tbody>
+        </table>
       </div>
-      <div class="section-body" id="sec-table">
-        <div class="tcard">
-          <div class="th"><div class="tt">Atividades</div><div class="tm" id="t-meta"></div></div>
-          <div style="overflow-x:auto">
-            <table>
-              <thead><tr><th>Data</th><th>Tipo</th><th>Nome</th><th>Dist</th><th>Tempo</th><th>Pace</th><th>BPM</th><th>Elev</th><th>Cidade</th><th>Gear</th><th>Link</th></tr></thead>
-              <tbody id="t-body"></tbody>
-            </table>
-          </div>
-          <div class="pg">
-            <button class="pg-btn" id="pg-p" onclick="changePage(-1)" disabled>‹ Anterior</button>
-            <span class="pg-info" id="pg-i"></span>
-            <button class="pg-btn" id="pg-n" onclick="changePage(1)">Próxima ›</button>
-          </div>
-        </div>
+      <div class="pg">
+        <button class="pg-btn" id="pg-p" onclick="changePage(-1)" disabled>‹ Anterior</button>
+        <span class="pg-info" id="pg-i"></span>
+        <button class="pg-btn" id="pg-n" onclick="changePage(1)">Próxima ›</button>
       </div>
     </div>
 
   </div><!-- /main -->
 
+  <!-- FOOTER -->
   <div class="footer">
     <div class="footer-text">
       Desenvolvido por <a href="https://github.com/andrescultori" target="_blank">André Scultori</a>
@@ -463,10 +350,11 @@ tbody td{padding:8px 13px;white-space:nowrap}
       &nbsp;·&nbsp; <a href="https://github.com/andrescultori/stravadashboard" target="_blank">GitHub</a>
     </div>
   </div>
+
 </div><!-- /app -->
 
 <script>
-const API_KEY = 'AIzaSyAnGwNDl65f9KUR5bGoS9bMxBEaHJA1nho';
+const API_KEY = 'AIzaSyCmo0vwro2AAzv-HwCRp0wVD6DC8mdInX4';
 const SID     = '1w4NXZRkAeYeVfYaaTAzzEsUnZtWgrs6oOIY6MGhbfIM';
 const PSZ     = 25;
 
@@ -476,93 +364,49 @@ let CH={};
 
 const ICO  = {Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊',WeightTraining:'🏋',Workout:'💪'};
 const COL  = {Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF',WeightTraining:'#F0C040',Workout:'#F0C040'};
-const YPAL = ['#6366f1','#f97316','#22c55e','#ec4899','#14b8a6','#eab308','#3b82f6','#a78bfa','#f43f5e','#8b5cf6','#64748b'];
-const MO_PT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const YPAL = ['#64748b','#6366f1','#8b5cf6','#ec4899','#f43f5e','#f97316','#eab308','#22c55e','#14b8a6','#3b82f6','#a78bfa'];
 
-// ── THEME ─────────────────────────────────────────────────────────────────────
-function initTheme() {
-  const saved = localStorage.getItem('dash-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('btn-theme').textContent = saved === 'dark' ? '☀️' : '🌙';
-}
-
-function toggleTheme() {
-  const cur  = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  document.getElementById('btn-theme').textContent = next === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem('dash-theme', next);
-  // Redraw charts to match theme
-  Object.keys(CH).forEach(id => { if(CH[id]) { CH[id].destroy(); delete CH[id]; } });
-  render();
-}
-
-// ── COLLAPSE ──────────────────────────────────────────────────────────────────
-function initCollapse() {
-  const saved = JSON.parse(localStorage.getItem('dash-collapse') || '{}');
-  Object.keys(saved).forEach(id => {
-    if (saved[id] === true) collapseSection(id, false);
-  });
-}
-
-function toggleSection(id) {
-  const body = document.getElementById('sec-' + id);
-  if (!body) return;
-  const isHidden = body.classList.contains('hidden');
-  if (isHidden) {
-    body.classList.remove('hidden');
-    updateCollapseBtn(id, false);
-  } else {
-    collapseSection(id, true);
-  }
-  // Save state
-  const saved = JSON.parse(localStorage.getItem('dash-collapse') || '{}');
-  saved[id] = !isHidden;
-  localStorage.setItem('dash-collapse', JSON.stringify(saved));
-}
-
-function collapseSection(id, save) {
-  const body = document.getElementById('sec-' + id);
-  if (body) body.classList.add('hidden');
-  updateCollapseBtn(id, true);
-}
-
-function updateCollapseBtn(id, collapsed) {
-  // Find the button in the section
-  const sec = document.getElementById('sec-' + id);
-  if (!sec) return;
-  const btn = sec.parentElement.querySelector('.btn-collapse');
-  if (btn) btn.textContent = collapsed ? '👁‍🗨 Mostrar' : '👁 Ocultar';
-}
-
-// ── LOAD ──────────────────────────────────────────────────────────────────────
-window.onload = () => { initTheme(); initCollapse(); loadData(); };
+// ── LOAD ─────────────────────────────────────────────────────────────────────
+window.onload = () => loadData();
 
 async function loadData() {
   show(true);
   try {
-    const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SID}/values/STRAVA!A:AH?key=${API_KEY}`);
+    // Carrega dados das atividades
+    const r = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${SID}/values/STRAVA!A:AH?key=${API_KEY}`
+    );
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     all = parse(d.values || []);
 
-    // CONFIG opcional
+    // Tenta carregar configurações da aba CONFIG (opcional)
     try {
-      const rc = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SID}/values/CONFIG!A:B?key=${API_KEY}`);
+      const rc = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${SID}/values/CONFIG!A:B?key=${API_KEY}`
+      );
       if (rc.ok) {
         const dc = await rc.json();
-        window._metas = {};
-        (dc.values || []).slice(1).forEach(row => {
+        const rows = dc.values || [];
+        window._metas = {}; // { Run: 240, Ride: 500, ... }
+        rows.slice(1).forEach(row => {
           if (row[0] && row[1]) {
-            const km = parseFloat(row[1]);
-            if (!isNaN(km) && km > 0) window._metas[row[0].trim()] = km;
+            const sport = row[0].trim();
+            const km    = parseFloat(row[1]);
+            if (!isNaN(km) && km > 0) window._metas[sport] = km;
           }
         });
+        // fallback legacy: se tiver META_KM usa só para Run
+        if (window._metas['META_KM']) {
+          window._metas['Run'] = window._metas['META_KM'];
+          delete window._metas['META_KM'];
+        }
       }
-    } catch(e) {}
+    } catch(e) {} // CONFIG é opcional — ignora se não existir
 
     aY=null; aS=null; aM=null; pg=1;
-    buildFilters(); apply();
+    buildFilters();
+    apply();
   } catch(e) { alert('Erro ao carregar: ' + e.message); }
   show(false);
 }
@@ -572,7 +416,9 @@ function fts(v) {
   if (!v && v !== 0) return 0;
   const s = String(v).trim();
   const n = parseFloat(s.replace(',','.'));
-  if (!isNaN(n) && !s.includes(':')) return (n > 0 && n < 2) ? Math.round(n * 86400) : (n >= 2 ? Math.round(n) : 0);
+  if (!isNaN(n) && !s.includes(':')) {
+    return (n > 0 && n < 2) ? Math.round(n * 86400) : (n >= 2 ? Math.round(n) : 0);
+  }
   const p = s.split(':');
   if (p.length === 3) return +p[0]*3600 + +p[1]*60 + +p[2];
   if (p.length === 2) return +p[0]*60 + +p[1];
@@ -582,276 +428,241 @@ function fts(v) {
 function parse(rows) {
   if (rows.length < 2) return [];
   return rows.slice(1).map(row => {
-    const g  = (i,d='') => (row[i]||'').toString().trim()||d;
-    const f  = i => parseFloat(g(i,'0').replace(',','.'))||0;
+    const g  = (i, d='') => (row[i]||'').toString().trim() || d;
+    const f  = i => parseFloat(g(i,'0').replace(',','.')) || 0;
     const dt = pdate(g(1));
     const durS  = fts(g(4));
     const paceS = fts(g(5));
     return {
-      id:g(0), date:dt, dStr:g(1).split(' ')[0],
-      year:dt?dt.getFullYear():0,
-      month:dt?`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}` : '',
-      dayKey:dt?dt.toISOString().split('T')[0]:'',
-      hour:dt?dt.getHours():-1,
-      sport:nsp(g(2)), distKm:f(3), durS,
-      paceS, paceStr:paceS>=60&&paceS<3600?fp(paceS):'—',
+      id:     g(0), date:dt, dStr:g(1).split(' ')[0],
+      year:   dt ? dt.getFullYear() : 0,
+      month:  dt ? `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}` : '',
+      dayKey: dt ? dt.toISOString().split('T')[0] : '',
+      sport:  nsp(g(2)), distKm:f(3), durS,
+      paceS, paceStr: paceS>=60&&paceS<3600 ? fp(paceS) : '—',
       avgHr:f(12), gear:g(14), city:g(16),
       elev:f(17), cal:f(18), name:g(19), link:g(22),
     };
-  }).filter(a=>a.date&&a.distKm>0).sort((a,b)=>b.date-a.date);
+  }).filter(a => a.date && a.distKm > 0).sort((a,b) => b.date - a.date);
 }
 
-function pdate(v) { const m=v.match(/(\d{2})\/(\d{2})\/(\d{4})/); return m?new Date(`${m[3]}-${m[2]}-${m[1]}`):null; }
+function pdate(v) {
+  const m = v.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+  return m ? new Date(`${m[3]}-${m[2]}-${m[1]}`) : null;
+}
 function nsp(v) {
-  const m={run:'Run',walk:'Walk',hike:'Hike',ride:'Ride',swim:'Swim',
-    virtualrun:'Run',trailrun:'Run',virtualride:'Ride',weighttraining:'WeightTraining',workout:'Workout'};
-  return m[v.toLowerCase()]||v;
+  const m = {run:'Run',walk:'Walk',hike:'Hike',ride:'Ride',swim:'Swim',
+    virtualrun:'Run',trailrun:'Run',virtualride:'Ride',
+    weighttraining:'WeightTraining',workout:'Workout'};
+  return m[v.toLowerCase()] || v;
 }
 
 // ── FORMAT ────────────────────────────────────────────────────────────────────
-function fp(s)   { if(!s||s<=0||s>=3600)return'—'; return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
-function ftt(s)  { const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return`${h}h ${String(m).padStart(2,'0')}m ${String(sec).padStart(2,'0')}s`; }
-function fdur(s) { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60); return h>0?`${h}h${m>0?' '+m+'m':''}`:m+'m'; }
-function fhms(s) { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`; }
-function fdist(km) { if(km>=10000)return`${(km/1000).toFixed(1)}K`; if(km>=1000)return`${(km/1000).toFixed(1)}K`; return km.toFixed(0); }
+function fp(s)    { if(!s||s<=0||s>=3600)return'—'; return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
+function ftt(s)   { const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return`${h}h ${String(m).padStart(2,'0')}m ${String(sec).padStart(2,'0')}s`; }
+function fdur(s)  { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60); return h>0?`${h}h${m>0?' '+m+'m':''}`:m+'m'; }
+function fhms(s)  { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`; }
+// Distância sem abreviação estranha
+function fdist(km) {
+  if (km >= 10000) return `${(km/1000).toFixed(1)}K`;
+  if (km >= 1000)  return `${Math.round(km/1000 * 10)/10}K`; // ex: 1.8K
+  return km.toFixed(0);
+}
 
 // ── FILTERS ───────────────────────────────────────────────────────────────────
 function buildFilters() {
   const years  = [...new Set(all.map(a=>a.year))].sort();
   const sports = [...new Set(all.map(a=>a.sport))].filter(Boolean);
-  const yc=document.getElementById('yc'); yc.innerHTML='';
+  const yc = document.getElementById('yc'); yc.innerHTML = '';
   mkc(yc,'Todos',true,()=>sf('y',null));
-  years.forEach(y=>mkc(yc,String(y),false,()=>sf('y',y)));
-  const sc=document.getElementById('sc'); sc.innerHTML='';
+  years.forEach(y => mkc(yc,String(y),false,()=>sf('y',y)));
+  const sc = document.getElementById('sc'); sc.innerHTML = '';
   mkc(sc,'Todos',true,()=>sf('s',null));
-  sports.forEach(s=>mkc(sc,(ICO[s]||'🏅')+' '+s,false,()=>sf('s',s)));
+  sports.forEach(s => mkc(sc,(ICO[s]||'🏅')+' '+s,false,()=>sf('s',s)));
 }
 
-function mkc(p,t,a,fn) { const b=document.createElement('button'); b.className='chip'+(a?' active':''); b.textContent=t; b.onclick=fn; p.appendChild(b); }
+function mkc(p,t,a,fn) {
+  const b = document.createElement('button');
+  b.className = 'chip'+(a?' active':''); b.textContent = t; b.onclick = fn;
+  p.appendChild(b);
+}
 
 function sf(type,v) {
-  if(type==='y'){aY=v;aM=null;}
-  if(type==='s')aS=v;
-  if(type==='m')aM=v;
+  if (type==='y') { aY=v; aM=null; }
+  if (type==='s') aS=v;
+  if (type==='m') aM=v;
   pg=1;
-  if(type==='y')document.querySelectorAll('#yc .chip').forEach(b=>b.classList.toggle('active',b.textContent===(v?String(v):'Todos')));
-  if(type==='s')document.querySelectorAll('#sc .chip').forEach(b=>{const bs=b.textContent.replace(/^.\s/,'');b.classList.toggle('active',v===null?b.textContent==='Todos':bs===v);});
+  if (type==='y') document.querySelectorAll('#yc .chip').forEach(b=>b.classList.toggle('active',b.textContent===(v?String(v):'Todos')));
+  if (type==='s') document.querySelectorAll('#sc .chip').forEach(b=>{
+    const bs=b.textContent.replace(/^.\s/,'');
+    b.classList.toggle('active',v===null?b.textContent==='Todos':bs===v);
+  });
   apply();
 }
 
 function apply() {
-  fil=all.filter(a=>{
-    if(aY&&a.year!==aY)return false;
-    if(aS&&a.sport!==aS)return false;
-    if(aM&&a.month!==aM)return false;
+  fil = all.filter(a => {
+    if (aY && a.year  !== aY) return false;
+    if (aS && a.sport !== aS) return false;
+    if (aM && a.month !== aM) return false;
     return true;
   });
   render();
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
-function render() { rLast(); rHero(); rKpis(); rRecords(); rBest(); rMeta(); rStreak(); rMo(); rSp(); rYoY(); rAn(); rPa(); rHR(); rHour(); rPaceMo(); rPistas(); rGear(); rTable(); }
-
-function rLast() {
-  if (!all.length) return;
-  const a   = all[0];
-  const now = new Date();
-  const diff = Math.floor((now - a.date) / 86400000);
-  const agoStr = diff === 0 ? 'hoje' : diff === 1 ? 'ontem' : `há ${diff} dias`;
-
-  document.getElementById('last-act-card').innerHTML = `
-    <div class="last-act">
-      <div class="last-act-icon">${ICO[a.sport]||'🏅'}</div>
-      <div>
-        <div class="last-act-name">${a.name||a.sport}</div>
-        <div class="last-act-date">${a.dStr} · <span class="sb sb-${a.sport}">${a.sport}</span></div>
-        <div class="last-act-ago">Sua última atividade foi ${agoStr}.</div>
-      </div>
-      <div class="last-act-stats">
-        <div class="last-act-stat">
-          <div class="last-act-stat-val" style="color:var(--orange)">${a.distKm.toFixed(2)}<span style="font-size:12px;color:var(--muted)"> km</span></div>
-          <div class="last-act-stat-lbl">Distância</div>
-        </div>
-        <div class="last-act-stat">
-          <div class="last-act-stat-val" style="color:var(--green)">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</div>
-          <div class="last-act-stat-lbl">Pace</div>
-        </div>
-        <div class="last-act-stat">
-          <div class="last-act-stat-val" style="color:var(--blue)">${fdur(a.durS)}</div>
-          <div class="last-act-stat-lbl">Tempo</div>
-        </div>
-        ${a.link?`<div class="last-act-stat"><a class="sl" href="${a.link}" target="_blank" title="Ver no Strava">🔗</a><div class="last-act-stat-lbl">Strava</div></div>`:''}
-      </div>
-    </div>`;
-}
+function render() { rHero(); rKpis(); rRecords(); rMeta(); rMo(); rSp(); rAn(); rPa(); rHR(); rPistas(); rGear(); rTable(); }
 
 function rHero() {
-  const dist=fil.reduce((s,a)=>s+a.distKm,0);
-  const sec=fil.reduce((s,a)=>s+a.durS,0);
-  const count=fil.length;
-  document.getElementById('h-dist').textContent=fdist(dist);
-  document.getElementById('h-time').textContent=ftt(sec);
-  document.getElementById('h-acts').textContent=count.toLocaleString('pt-BR');
-  document.getElementById('h-dist-sub').textContent=`média ${count?(dist/count).toFixed(1):0} km por atividade`;
-  document.getElementById('h-time-sub').textContent=`${(sec/86400).toFixed(1)} dias contínuos`;
-  document.getElementById('h-acts-sub').textContent=aY?`em ${aY}`:'no histórico completo';
+  const dist  = fil.reduce((s,a)=>s+a.distKm,0);
+  const sec   = fil.reduce((s,a)=>s+a.durS,0);
+  const count = fil.length;
+  const avg   = count ? (dist/count).toFixed(1) : 0;
+
+  document.getElementById('h-dist').textContent = fdist(dist);
+  document.getElementById('h-time').textContent = ftt(sec);
+  document.getElementById('h-acts').textContent = count.toLocaleString('pt-BR');
+
+  document.getElementById('h-dist-sub').textContent = `média ${avg} km por atividade`;
+  document.getElementById('h-time-sub').textContent = `${(sec/86400).toFixed(1)} dias contínuos`;
+  document.getElementById('h-acts-sub').textContent = aY ? `em ${aY}` : 'no histórico completo';
 }
 
 function rKpis() {
-  const runs=fil.filter(a=>['Run','Walk','Hike'].includes(a.sport)&&a.paceS>=60&&a.paceS<=1800);
-  document.getElementById('k-pace').textContent=runs.length?fp(runs.reduce((s,a)=>s+a.paceS,0)/runs.length):'—';
-  const dias=new Set(fil.map(a=>a.dayKey).filter(Boolean));
-  document.getElementById('k-days').textContent=dias.size;
-  const totalDias=new Set(all.map(a=>a.dayKey).filter(Boolean)).size;
-  document.getElementById('k-days-sub').textContent=`de ${totalDias} no total`;
-  const e=fil.reduce((s,a)=>s+a.elev,0);
-  document.getElementById('k-elev').textContent=e>=1000?`${(e/1000).toFixed(1)}K`:Math.round(e)||'—';
-  const c=fil.reduce((s,a)=>s+a.cal,0);
-  document.getElementById('k-cal').textContent=c>=1000?`${(c/1000).toFixed(1)}k`:Math.round(c)||'—';
+  // Pace
+  const runs = fil.filter(a=>['Run','Walk','Hike'].includes(a.sport)&&a.paceS>=60&&a.paceS<=1800);
+  document.getElementById('k-pace').textContent = runs.length ? fp(runs.reduce((s,a)=>s+a.paceS,0)/runs.length) : '—';
+
+  // Dias ativos (dias únicos com pelo menos 1 atividade)
+  const dias = new Set(fil.map(a=>a.dayKey).filter(Boolean));
+  document.getElementById('k-days').textContent = dias.size;
+  const totalDias = new Set(all.map(a=>a.dayKey).filter(Boolean)).size;
+  document.getElementById('k-days-sub').textContent = `de ${totalDias} no total`;
+
+  // Elevação
+  const e = fil.reduce((s,a)=>s+a.elev,0);
+  document.getElementById('k-elev').textContent = e>=1000 ? `${(e/1000).toFixed(1)}K` : Math.round(e)||'—';
+
+  // Calorias
+  const c = fil.reduce((s,a)=>s+a.cal,0);
+  document.getElementById('k-cal').textContent = c>=1000 ? `${(c/1000).toFixed(1)}k` : Math.round(c)||'—';
 }
 
 function rRecords() {
-  const runs=fil.filter(a=>a.sport==='Run'&&a.paceS>=60&&a.paceS<=1800&&a.distKm>0);
-  const dists=[
-    {label:'1 km',min:.9,max:1.5},
-    {label:'5 km',min:4.5,max:6.0},
-    {label:'10 km',min:9.0,max:11.5},
-    {label:'Meia 21k',min:19.5,max:22.5},
-    {label:'42k',min:40.0,max:44.0},
-    {label:'Maior',min:0,max:999,longest:true},
-  ];
-  document.getElementById('records-grid').innerHTML=dists.map(d=>{
-    if(d.longest){
-      const best=runs.length?runs.reduce((b,a)=>a.distKm>b.distKm?a:b):null;
-      if(!best)return'';
-      return`<div class="record-item"><div class="record-dist">${best.distKm.toFixed(2)} km</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${best.dStr}</div></div>`;
-    }
-    const cands=runs.filter(a=>a.distKm>=d.min&&a.distKm<=d.max);
-    if(!cands.length)return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div><div class="record-pace">sem registro</div></div>`;
-    const best=cands.reduce((b,a)=>a.paceS<b.paceS?a:b);
-    return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${best.dStr}</div></div>`;
-  }).join('');
-}
+  // Calcula records reais a partir dos dados filtrados (corridas apenas)
+  const runs = fil.filter(a=>a.sport==='Run'&&a.paceS>=60&&a.paceS<=1800&&a.distKm>0);
 
-function rBest() {
-  const base=all.filter(a=>{if(aY&&a.year!==aY)return false;if(aS&&a.sport!==aS)return false;return true;});
-  const byM={};
-  base.forEach(a=>{if(!a.month)return;if(!byM[a.month])byM[a.month]={km:0,acts:0,sec:0,pS:0,pN:0,elev:0};byM[a.month].km+=a.distKm;byM[a.month].acts++;byM[a.month].sec+=a.durS;byM[a.month].elev+=a.elev;if(a.paceS>=60&&a.paceS<=1800){byM[a.month].pS+=a.paceS;byM[a.month].pN++;}});
-  const months=Object.entries(byM).sort((a,b)=>b[1].km-a[1].km);
-  if(months.length){
-    const[mk,md]=months[0];const[my,mn]=mk.split('-');
-    document.getElementById('best-month-label').textContent=`${MO_PT[+mn-1]}/${my}`;
-    document.getElementById('best-month-content').innerHTML=`<div class="best-badge">🥇 Recorde de distância</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">Distância</div><div class="best-stat-value" style="color:var(--orange)">${md.km.toFixed(1)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${md.acts} atividades</div></div><div class="best-stat"><div class="best-stat-label">Tempo total</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(md.sec)}</div></div><div class="best-stat"><div class="best-stat-label">Elevação</div><div class="best-stat-value" style="color:var(--yellow)">${Math.round(md.elev)}<span style="font-size:13px;color:var(--muted)"> m</span></div></div><div class="best-stat"><div class="best-stat-label">Pace médio</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${md.pN?fp(md.pS/md.pN)+'/km':'—'}</div></div></div>`;
-  }
-  const byY={};
-  base.forEach(a=>{if(!byY[a.year])byY[a.year]={km:0,acts:0,sec:0,pS:0,pN:0,days:new Set()};byY[a.year].km+=a.distKm;byY[a.year].acts++;byY[a.year].sec+=a.durS;if(a.dayKey)byY[a.year].days.add(a.dayKey);if(a.paceS>=60&&a.paceS<=1800){byY[a.year].pS+=a.paceS;byY[a.year].pN++;}});
-  const years=Object.entries(byY).sort((a,b)=>b[1].km-a[1].km);
-  if(years.length){
-    const[yk,yd]=years[0];
-    document.getElementById('best-year-label').textContent=yk;
-    document.getElementById('best-year-content').innerHTML=`<div class="best-badge">🥇 Recorde de distância</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">Distância</div><div class="best-stat-value" style="color:var(--orange)">${yd.km.toFixed(0)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${yd.acts} atividades</div></div><div class="best-stat"><div class="best-stat-label">Tempo total</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(yd.sec)}</div></div><div class="best-stat"><div class="best-stat-label">Dias ativos</div><div class="best-stat-value" style="color:var(--green)">${yd.days.size}<span style="font-size:13px;color:var(--muted)"> dias</span></div></div><div class="best-stat"><div class="best-stat-label">Pace médio</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${yd.pN?fp(yd.pS/yd.pN)+'/km':'—'}</div></div></div>`;
-  }
+  const dists = [
+    {label:'1 km',      min:0.9,  max:1.5},
+    {label:'5 km',      min:4.5,  max:6.0},
+    {label:'10 km',     min:9.0,  max:11.5},
+    {label:'Meia 21k',  min:19.5, max:22.5},
+    {label:'42k',       min:40.0, max:44.0},
+    {label:'Maior',     min:0,    max:999, longest:true},
+  ];
+
+  const grid = document.getElementById('records-grid');
+  grid.innerHTML = dists.map(d => {
+    let best;
+    if (d.longest) {
+      best = runs.length ? runs.reduce((b,a)=>a.distKm>b.distKm?a:b) : null;
+      if (!best) return '';
+      return `<div class="record-item">
+        <div class="record-dist">${best.distKm.toFixed(2)} km</div>
+        <div class="record-time">${fhms(best.durS)}</div>
+        <div class="record-pace">${best.paceStr}/km</div>
+        <div class="record-date">${best.dStr}</div>
+      </div>`;
+    }
+    const candidates = runs.filter(a=>a.distKm>=d.min&&a.distKm<=d.max);
+    if (!candidates.length) return `<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div><div class="record-pace">sem registro</div></div>`;
+    best = candidates.reduce((b,a)=>a.paceS<b.paceS?a:b);
+    return `<div class="record-item">
+      <div class="record-dist">${d.label}</div>
+      <div class="record-time">${fhms(best.durS)}</div>
+      <div class="record-pace">${best.paceStr}/km</div>
+      <div class="record-date">${best.dStr}</div>
+    </div>`;
+  }).join('');
 }
 
 function rMeta() {
-  const metas=window._metas||{};
-  const sports=Object.keys(metas);
-  const metaSection=document.getElementById('meta-section');
-  if(!sports.length){metaSection.style.display='none';return;}
-  metaSection.style.display='block';
-  const anoAtual=new Date().getFullYear();
-  document.getElementById('meta-ano').textContent=`· ${anoAtual}`;
-  const hoje=new Date(),fimAno=new Date(anoAtual,11,31);
-  const semanas=Math.max(1,Math.ceil((fimAno-hoje)/(7*86400000)));
-  document.getElementById('meta-items').innerHTML=sports.map(sport=>{
-    const metaKm=metas[sport];
-    const feito=all.filter(a=>a.year===anoAtual&&a.sport===sport).reduce((s,a)=>s+a.distKm,0);
-    const pct=Math.min(100,(feito/metaKm*100));
-    const falta=Math.max(0,metaKm-feito).toFixed(1);
-    const icon={Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊'}[sport]||'🏅';
-    const cor={Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF'}[sport]||'#FF6B35';
-    return`<div class="meta-item"><div class="meta-item-header"><div class="meta-item-sport">${icon} ${sport}</div><div class="meta-item-pct" style="color:${cor}">${pct.toFixed(1)}%</div></div><div class="meta-bar-bg"><div class="meta-bar-fill" style="width:${pct.toFixed(1)}%;background:${cor}"></div></div><div class="meta-info"><span>✅ ${feito.toFixed(1)} km</span><span>📍 faltam ${falta} km</span><span>🎯 ${metaKm} km</span></div></div>`;
+  const anoAtual = new Date().getFullYear();
+  const metas = window._metas || {Run: 240}; // fallback padrão
+  const hoje  = new Date();
+  const fimAno = new Date(anoAtual,11,31);
+  const semanas = Math.max(1, Math.ceil((fimAno-hoje)/(7*86400000)));
+
+  // Filtra apenas esportes que têm meta definida
+  const sports = Object.keys(metas);
+  if (!sports.length) { document.getElementById('meta-card').style.display='none'; return; }
+
+  document.getElementById('meta-card').style.display='block';
+  document.getElementById('meta-ano').textContent = `· ${anoAtual}`;
+
+  const metaContent = document.getElementById('meta-items');
+  metaContent.innerHTML = sports.map(sport => {
+    const metaKm = metas[sport];
+    const feito  = all.filter(a=>a.year===anoAtual && a.sport===sport).reduce((s,a)=>s+a.distKm,0);
+    const pct    = Math.min(100,(feito/metaKm*100));
+    const falta  = Math.max(0, metaKm - feito).toFixed(1);
+    const porSem = (falta/semanas).toFixed(1);
+    const icon   = {Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊'}[sport] || '🏅';
+    const cor    = {Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF'}[sport] || '#FF6B35';
+
+    return `<div class="meta-item">
+      <div class="meta-item-header">
+        <div class="meta-item-sport">${icon} ${sport}</div>
+        <div class="meta-item-pct" style="color:${cor}">${pct.toFixed(1)}%</div>
+      </div>
+      <div class="meta-bar-bg">
+        <div class="meta-bar-fill" style="width:${pct.toFixed(1)}%;background:${cor}"></div>
+      </div>
+      <div class="meta-info">
+        <span>✅ ${feito.toFixed(1)} km</span>
+        <span>📍 faltam ${falta} km</span>
+        <span>🎯 meta: ${metaKm} km</span>
+      </div>
+    </div>`;
   }).join('');
 }
 
-function rStreak() {
-  // Calcula streak usando todos os dados (sem filtro)
-  const days=[...new Set(all.map(a=>a.dayKey).filter(Boolean))].sort();
-  if(!days.length){document.getElementById('streak-cur').textContent='0';document.getElementById('streak-max').textContent='0';return;}
-
-  let maxStreak=1,curStreak=1,tempStreak=1;
-  for(let i=1;i<days.length;i++){
-    const prev=new Date(days[i-1]),cur=new Date(days[i]);
-    const diff=(cur-prev)/86400000;
-    if(diff===1){tempStreak++;if(tempStreak>maxStreak)maxStreak=tempStreak;}
-    else tempStreak=1;
-  }
-  // Streak atual: conta de trás pra frente
-  const today=new Date().toISOString().split('T')[0];
-  const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
-  const lastDay=days[days.length-1];
-  if(lastDay!==today&&lastDay!==yesterday){curStreak=0;}
-  else{
-    curStreak=1;
-    for(let i=days.length-2;i>=0;i--){
-      const prev=new Date(days[i]),cur=new Date(days[i+1]);
-      if((cur-prev)/86400000===1)curStreak++;
-      else break;
-    }
-  }
-
-  document.getElementById('streak-cur').textContent=curStreak;
-  document.getElementById('streak-max').textContent=maxStreak;
-  document.getElementById('streak-cur-sub').textContent=curStreak>0?`dias consecutivos até hoje`:`última atividade: ${lastDay}`;
-  document.getElementById('streak-max-sub').textContent=`recorde: ${maxStreak} dias seguidos`;
-}
-
 function rMo() {
-  const mo={};fil.forEach(a=>{if(a.month)mo[a.month]=(mo[a.month]||0)+a.distKm;});
+  const mo={};
+  fil.forEach(a=>{if(a.month)mo[a.month]=(mo[a.month]||0)+a.distKm;});
   const lb=Object.keys(mo).sort().slice(-24);
   const vl=lb.map(m=>+mo[m].toFixed(1));
-  const sl=lb.map(m=>{const[y,n]=m.split('-');return MO_PT[+n-1]+'/'+y.slice(2);});
-  dc('c-mo',{type:'bar',data:{labels:sl,datasets:[{data:vl,backgroundColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.3)'),borderColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.6)'),borderWidth:1,borderRadius:4}]},
-    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} km`}},click:(e,el)=>{if(el.length){const m=lb[el[0].index];sf('m',aM===m?null:m);}}})});
+  const sl=lb.map(m=>{const[y,n]=m.split('-');return['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][+n-1]+'/'+y.slice(2);});
+  dc('c-mo',{type:'bar',data:{labels:sl,datasets:[{data:vl,
+    backgroundColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.3)'),
+    borderColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.6)'),
+    borderWidth:1,borderRadius:4}]},
+    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} km`}},
+      click:(e,el)=>{if(el.length){const m=lb[el[0].index];sf('m',aM===m?null:m);}}})});
 }
 
 function rSp() {
   const cnt={};fil.forEach(a=>{cnt[a.sport]=(cnt[a.sport]||0)+1;});
   const ent=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
-  dc('c-sp',{type:'doughnut',data:{labels:ent.map(([s])=>(ICO[s]||'🏅')+' '+s),datasets:[{data:ent.map(([,c])=>c),backgroundColor:ent.map(([s])=>COL[s]||'#58A6FF'),borderColor:getComputedStyle(document.documentElement).getPropertyValue('--surf').trim()||'#161B22',borderWidth:3}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{color:'#7D8590',font:{size:10},padding:10,boxWidth:10}},tooltip:{callbacks:{label:c=>` ${c.label}: ${c.parsed}`}}},
-      onClick:(e,el)=>{if(el.length){const s=ent[el[0].index][0];sf('s',aS===s?null:s);}},onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default';}}});
-}
-
-function rYoY() {
-  // Acúmulo mensal por ano (Jan=1...Dez=12)
-  const base=all.filter(a=>{if(aS&&a.sport!==aS)return false;return a.year>0;});
-  const years=[...new Set(base.map(a=>a.year))].sort().slice(-5); // últimos 5 anos
-  const datasets=years.map((y,i)=>{
-    const monthly=Array(12).fill(0);
-    base.filter(a=>a.year===y).forEach(a=>{
-      const mo=a.date.getMonth(); // 0-based
-      monthly[mo]+=a.distKm;
-    });
-    // Acúmulo
-    const acc=[];let sum=0;
-    monthly.forEach(v=>{sum+=v;acc.push(+sum.toFixed(1));});
-    const col=YPAL[i%YPAL.length];
-    return{label:String(y),data:acc,borderColor:col,backgroundColor:col+'22',borderWidth:y===aY?3:1.5,pointRadius:y===aY?4:2,tension:.3,fill:false};
-  });
-  dc('c-yoy',{type:'line',data:{labels:MO_PT,datasets},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{color:'#7D8590',font:{size:10},padding:8,boxWidth:12}},
-        tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y.toFixed(0)} km`}}},
-      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}},
-        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}}}}});
+  dc('c-sp',{type:'doughnut',data:{
+    labels:ent.map(([s])=>(ICO[s]||'🏅')+' '+s),
+    datasets:[{data:ent.map(([,c])=>c),backgroundColor:ent.map(([s])=>COL[s]||'#58A6FF'),borderColor:'#161B22',borderWidth:3}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',
+      plugins:{legend:{position:'bottom',labels:{color:'#7D8590',font:{size:10},padding:10,boxWidth:10}},
+        tooltip:{callbacks:{label:c=>` ${c.label}: ${c.parsed}`}}},
+      onClick:(e,el)=>{if(el.length){const s=ent[el[0].index][0];sf('s',aS===s?null:s);}},
+      onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default';}}});
 }
 
 function rAn() {
   const yr={};fil.forEach(a=>{yr[a.year]=(yr[a.year]||0)+a.distKm;});
   const lb=Object.keys(yr).sort();const vl=lb.map(y=>+yr[y].toFixed(1));
-  dc('c-an',{type:'bar',data:{labels:lb,datasets:[{data:vl,backgroundColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]+'77'),borderColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]),borderWidth:1,borderRadius:4}]},
-    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(0)} km`}},click:(e,el)=>{if(el.length){const y=+lb[el[0].index];sf('y',aY===y?null:y);}}})});
+  dc('c-an',{type:'bar',data:{labels:lb,datasets:[{data:vl,
+    backgroundColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]+'77'),
+    borderColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]),
+    borderWidth:1,borderRadius:4}]},
+    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(0)} km`}},
+      click:(e,el)=>{if(el.length){const y=+lb[el[0].index];sf('y',aY===y?null:y);}}})});
 }
 
 function rPa() {
@@ -859,9 +670,11 @@ function rPa() {
   const by={};runs.forEach(a=>{if(!by[a.year])by[a.year]={s:0,n:0};by[a.year].s+=a.paceS;by[a.year].n++;});
   const lb=Object.keys(by).sort();const vl=lb.map(y=>by[y].s/by[y].n/60);
   dc('c-pa',{type:'line',data:{labels:lb,datasets:[{data:vl,borderColor:'#39D353',backgroundColor:'rgba(57,211,83,.1)',borderWidth:2.5,pointBackgroundColor:'#39D353',pointRadius:4,fill:true,tension:.3}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const m=Math.floor(c.parsed.y),s=Math.round((c.parsed.y%1)*60);return` ${m}:${String(s).padStart(2,'0')} min/km`;}}}},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>{const m=Math.floor(c.parsed.y),s=Math.round((c.parsed.y%1)*60);return` ${m}:${String(s).padStart(2,'0')} min/km`;}}}},
       scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}},
-        y:{reverse:true,grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10},callback:v=>{const m=Math.floor(v),s=Math.round((v%1)*60);return`${m}:${String(s).padStart(2,'0')}`;}},border:{color:'transparent'}}}}});
+        y:{reverse:true,grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10},
+          callback:v=>{const m=Math.floor(v),s=Math.round((v%1)*60);return`${m}:${String(s).padStart(2,'0')}`;}},border:{color:'transparent'}}}}});
 }
 
 function rHR() {
@@ -872,57 +685,44 @@ function rHR() {
     options:co({tip:{callbacks:{label:c=>` ${c.parsed.y} bpm`}}})});
 }
 
-function rHour() {
-  const counts=Array(24).fill(0);
-  fil.filter(a=>a.hour>=0).forEach(a=>counts[a.hour]++);
-  const labels=Array.from({length:24},(_,i)=>`${String(i).padStart(2,'0')}h`);
-  // Agrupa em períodos para melhor leitura
-  const colors=counts.map((_,i)=>{
-    if(i>=5&&i<12)  return 'rgba(255,107,53,.7)';  // manhã
-    if(i>=12&&i<18) return 'rgba(88,166,255,.7)';   // tarde
-    if(i>=18&&i<23) return 'rgba(188,140,255,.7)';  // noite
-    return 'rgba(100,116,139,.4)';                   // madrugada
-  });
-  dc('c-hour',{type:'bar',data:{labels,datasets:[{data:counts,backgroundColor:colors,borderRadius:3}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} atividades`}}},
-      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:9},maxRotation:0},border:{color:'transparent'}},
-        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}}}}});
-}
-
-function rPaceMo() {
-  const runs=fil.filter(a=>['Run','Walk','Hike'].includes(a.sport)&&a.paceS>=60&&a.paceS<=1800);
-  const by={};
-  runs.forEach(a=>{if(!by[a.month])by[a.month]={s:0,n:0};by[a.month].s+=a.paceS;by[a.month].n++;});
-  const lb=Object.keys(by).sort().slice(-24);
-  const vl=lb.map(m=>by[m].s/by[m].n/60);
-  const sl=lb.map(m=>{const[y,n]=m.split('-');return MO_PT[+n-1]+'/'+y.slice(2);});
-  const label=aY?`evolução do pace em ${aY}`:'últimos 24 meses';
-  document.getElementById('pace-month-label').textContent=label;
-  dc('c-pace-mo',{type:'line',data:{labels:sl,datasets:[{data:vl,borderColor:'#39D353',backgroundColor:'rgba(57,211,83,.08)',borderWidth:2,pointBackgroundColor:'#39D353',pointRadius:3,fill:true,tension:.3}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const m=Math.floor(c.parsed.y),s=Math.round((c.parsed.y%1)*60);return` ${m}:${String(s).padStart(2,'0')} min/km`;}}}},
-      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:9},maxTicksLimit:12},border:{color:'transparent'}},
-        y:{reverse:true,grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:9},callback:v=>{const m=Math.floor(v),s=Math.round((v%1)*60);return`${m}:${String(s).padStart(2,'0')}`;}},border:{color:'transparent'}}}}});
-}
-
 function rPistas() {
-  const p={};fil.filter(a=>a.city).forEach(a=>{
-    if(!p[a.city])p[a.city]={runs:0,km:0,pS:0,pN:0};
-    p[a.city].runs++;p[a.city].km+=a.distKm;
-    if(a.paceS>=60&&a.paceS<=1800){p[a.city].pS+=a.paceS;p[a.city].pN++;}
+  const pistas={};
+  fil.filter(a=>a.city).forEach(a=>{
+    if(!pistas[a.city])pistas[a.city]={runs:0,km:0,paceSum:0,paceN:0};
+    pistas[a.city].runs++;
+    pistas[a.city].km+=a.distKm;
+    if(a.paceS>=60&&a.paceS<=1800){pistas[a.city].paceSum+=a.paceS;pistas[a.city].paceN++;}
   });
-  const sorted=Object.entries(p).sort((a,b)=>b[1].runs-a[1].runs).slice(0,8);
-  document.getElementById('pista-list').innerHTML=sorted.map(([n,d])=>`<div class="pista-item"><div class="pista-name">📍 ${n}</div><div class="pista-stats"><span class="pista-runs">${d.runs} corridas</span><span class="pista-km">${d.km.toFixed(1)} km</span>${d.pN?`<span class="pista-pace">${fp(d.pS/d.pN)}/km</span>`:''}</div></div>`).join('');
+  const sorted=Object.entries(pistas).sort((a,b)=>b[1].runs-a[1].runs).slice(0,8);
+  document.getElementById('pista-list').innerHTML = sorted.map(([name,d])=>`
+    <div class="pista-item">
+      <div class="pista-name">📍 ${name}</div>
+      <div class="pista-stats">
+        <span class="pista-runs">${d.runs} corridas</span>
+        <span class="pista-km">${d.km.toFixed(1)} km</span>
+        ${d.paceN?`<span class="pista-pace">${fp(d.paceSum/d.paceN)}/km</span>`:''}
+      </div>
+    </div>`).join('');
 }
 
 function rGear() {
-  const g={};fil.filter(a=>a.gear&&a.gear!=='Outro').forEach(a=>{
-    if(!g[a.gear])g[a.gear]={km:0,runs:0,pS:0,pN:0};
-    g[a.gear].km+=a.distKm;g[a.gear].runs++;
-    if(a.paceS>=60&&a.paceS<=1800){g[a.gear].pS+=a.paceS;g[a.gear].pN++;}
+  const gear={};
+  fil.filter(a=>a.gear&&a.gear!=='Outro').forEach(a=>{
+    if(!gear[a.gear])gear[a.gear]={km:0,runs:0,paceSum:0,paceN:0};
+    gear[a.gear].km+=a.distKm;gear[a.gear].runs++;
+    if(a.paceS>=60&&a.paceS<=1800){gear[a.gear].paceSum+=a.paceS;gear[a.gear].paceN++;}
   });
-  const sorted=Object.entries(g).sort((a,b)=>b[1].km-a[1].km).slice(0,6);
-  const maxKm=sorted.length?sorted[0][1].km:1;
-  document.getElementById('gear-list').innerHTML=sorted.map(([n,d])=>`<div class="gear-item"><div class="gear-header"><div class="gear-name">👟 ${n}</div><div class="gear-km">${d.km.toFixed(0)} km</div></div><div class="gear-bar-bg"><div class="gear-bar-fill" style="width:${(d.km/maxKm*100).toFixed(0)}%"></div></div><div class="gear-sub">${d.runs} atividades${d.pN?` · pace médio ${fp(d.pS/d.pN)}/km`:''}</div></div>`).join('');
+  const sorted=Object.entries(gear).sort((a,b)=>b[1].km-a[1].km).slice(0,6);
+  const maxKm = sorted.length ? sorted[0][1].km : 1;
+  document.getElementById('gear-list').innerHTML = sorted.map(([name,d])=>`
+    <div class="gear-item">
+      <div class="gear-header">
+        <div class="gear-name">👟 ${name}</div>
+        <div class="gear-km">${d.km.toFixed(0)} km</div>
+      </div>
+      <div class="gear-bar-bg"><div class="gear-bar-fill" style="width:${(d.km/maxKm*100).toFixed(0)}%"></div></div>
+      <div class="gear-sub">${d.runs} atividades${d.paceN?` · pace médio ${fp(d.paceSum/d.paceN)}/km`:''}</div>
+    </div>`).join('');
 }
 
 function rTable() {
@@ -933,20 +733,46 @@ function rTable() {
   document.getElementById('pg-i').textContent=`Página ${pg} de ${pages} · ${total} atividades`;
   document.getElementById('pg-p').disabled=pg<=1;
   document.getElementById('pg-n').disabled=pg>=pages;
-  document.getElementById('t-body').innerHTML=shown.map(a=>`<tr><td class="td-date">${a.dStr}</td><td><span class="sb sb-${a.sport}">${a.sport}</span></td><td style="color:var(--text);font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis">${a.name||a.sport}</td><td class="td-dist">${a.distKm.toFixed(2)} km</td><td style="color:var(--muted)">${fdur(a.durS)}</td><td class="td-pace">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</td><td class="td-hr">${a.avgHr>0?Math.round(a.avgHr)+' bpm':'—'}</td><td class="td-elev">${a.elev>0?a.elev.toFixed(0)+'m':'—'}</td><td class="td-city">${a.city||'—'}</td><td style="color:var(--muted);font-size:10px">${a.gear&&a.gear!=='Outro'?a.gear:'—'}</td><td>${a.link?`<a class="sl" href="${a.link}" target="_blank">🔗</a>`:''}</td></tr>`).join('');
+  document.getElementById('t-body').innerHTML=shown.map(a=>`
+    <tr>
+      <td class="td-date">${a.dStr}</td>
+      <td><span class="sb sb-${a.sport}">${a.sport}</span></td>
+      <td style="color:var(--text);font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis">${a.name||a.sport}</td>
+      <td class="td-dist">${a.distKm.toFixed(2)} km</td>
+      <td style="color:var(--muted)">${fdur(a.durS)}</td>
+      <td class="td-pace">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</td>
+      <td class="td-hr">${a.avgHr>0?Math.round(a.avgHr)+' bpm':'—'}</td>
+      <td class="td-elev">${a.elev>0?a.elev.toFixed(0)+'m':'—'}</td>
+      <td class="td-city">${a.city||'—'}</td>
+      <td style="color:var(--muted);font-size:10px">${a.gear&&a.gear!=='Outro'?a.gear:'—'}</td>
+      <td>${a.link?`<a class="sl" href="${a.link}" target="_blank" title="Ver no Strava">🔗</a>`:''}</td>
+    </tr>`).join('');
 }
 
-function changePage(d){pg+=d;rTable();document.querySelector('.tcard').scrollIntoView({behavior:'smooth',block:'start'});}
+function changePage(d) {
+  pg+=d; rTable();
+  document.querySelector('.tcard').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
+// ── CHART HELPERS ─────────────────────────────────────────────────────────────
 function co({tip,click}={}) {
-  return{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tip||{}},
-    scales:{x:{grid:{color:'rgba(128,128,128,.1)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}},
-      y:{grid:{color:'rgba(128,128,128,.1)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}}},
-    onClick:click||(()=>{}),onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default';}};
+  return {responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:tip||{}},
+    scales:{
+      x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}},
+      y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}},
+    },
+    onClick:click||(()=>{}),
+    onHover:(e,el)=>{e.native.target.style.cursor=el.length?'pointer':'default';},
+  };
 }
 
-function dc(id,cfg){if(CH[id]){CH[id].destroy();delete CH[id];}CH[id]=new Chart(document.getElementById(id),cfg);}
-function show(v){document.getElementById('loading').style.display=v?'flex':'none';}
+function dc(id,cfg) {
+  if(CH[id]){CH[id].destroy();delete CH[id];}
+  CH[id]=new Chart(document.getElementById(id),cfg);
+}
+
+function show(v) { document.getElementById('loading').style.display = v?'flex':'none'; }
 </script>
 </body>
 </html>
