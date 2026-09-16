@@ -45,6 +45,12 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .btn-t:hover{border-color:var(--orange);color:var(--orange)}
 .btn-theme{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 9px;font-size:15px;cursor:pointer;line-height:1;transition:border-color .15s}
 .btn-theme:hover{border-color:var(--orange)}
+.btn-strava{background:var(--surf2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:5px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:5px}
+.btn-strava:hover{border-color:var(--orange);color:var(--orange)}
+.btn-strava.loading{opacity:.6;cursor:wait}
+.strava-sep{width:1px;height:20px;background:var(--border)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text);z-index:300;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.3);transform:translateY(80px);opacity:0;transition:all .3s}
+.toast.show{transform:translateY(0);opacity:1}
 
 /* ── FILTERS ── */
 .filters-bar{background:var(--surf);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
@@ -241,9 +247,23 @@ tbody td{padding:8px 13px;white-space:nowrap}
       </div>
     </div>
     <div class="topbar-right">
+      <button class="btn-strava" onclick="stravaAction('sincronizar')" id="btn-sync" title="Importar novas atividades do Strava">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+        Sincronizar
+      </button>
+      <button class="btn-strava" onclick="stravaAction('reprocessar')" id="btn-reproc" title="Preencher campos vazios nas atividades existentes">
+        🔄 Reprocessar
+      </button>
+      <div class="strava-sep"></div>
       <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema">🌙</button>
       <button class="btn-t" onclick="loadData()">↻ Atualizar</button>
     </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toast-icon"></span>
+    <span id="toast-msg"></span>
+  </div>
   </div>
 
   <!-- FILTERS -->
@@ -947,6 +967,50 @@ function co({tip,click}={}) {
 
 function dc(id,cfg){if(CH[id]){CH[id].destroy();delete CH[id];}CH[id]=new Chart(document.getElementById(id),cfg);}
 function show(v){document.getElementById('loading').style.display=v?'flex':'none';}
+
+// ── STRAVA ACTIONS ────────────────────────────────────────────────────────────
+const WEB_APP = 'https://script.google.com/macros/s/AKfycbyUG44b-RT-WbD8YfNx9SsVEaFk236-DvZJld97kVWoBCkRxTIIonB2mgcWGHl47-Y/exec';
+
+async function stravaAction(acao) {
+  const btnId = acao === 'sincronizar' ? 'btn-sync' : 'btn-reproc';
+  const btn   = document.getElementById(btnId);
+  const labels = {
+    sincronizar: {loading:'Sincronizando…', ok:'Sincronização iniciada! Aguarde alguns minutos e clique em Atualizar.', err:'Erro ao sincronizar.'},
+    reprocessar: {loading:'Reprocessando…', ok:'Reprocessamento iniciado! Aguarde alguns minutos e clique em Atualizar.', err:'Erro ao reprocessar.'},
+  };
+  const lbl = labels[acao];
+
+  btn.classList.add('loading');
+  btn.textContent = lbl.loading;
+  toast('🔄 ' + lbl.loading, 'info');
+
+  try {
+    const r = await fetch(`${WEB_APP}?acao=${acao}`, {method:'GET', mode:'no-cors'});
+    // no-cors sempre retorna opaque — assumimos sucesso se não jogar exceção
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      btn.innerHTML = acao === 'sincronizar'
+        ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg> Sincronizar'
+        : '🔄 Reprocessar';
+      toast(lbl.ok, 'ok', 6000);
+    }, 1500);
+  } catch(e) {
+    btn.classList.remove('loading');
+    toast(lbl.err, 'err');
+  }
+}
+
+function toast(msg, type='info', duration=4000) {
+  const el  = document.getElementById('toast');
+  const ico = document.getElementById('toast-icon');
+  const txt = document.getElementById('toast-msg');
+  const icons = {ok:'✅', err:'❌', info:'🔄'};
+  ico.textContent = icons[type] || '💬';
+  txt.textContent = msg;
+  el.className = 'toast show';
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), duration);
+}
 </script>
 </body>
 </html>
