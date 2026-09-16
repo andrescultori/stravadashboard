@@ -583,7 +583,7 @@ function updateCollapseBtn(id, collapsed) {
 }
 
 // ── LOAD ──────────────────────────────────────────────────────────────────────
-window.onload = () => { initTheme(); initCollapse(); initDrag(); loadData(); };
+window.onload = () => { initTheme(); initCollapse(); loadData(); };
 
 async function loadData() {
   show(true);
@@ -610,6 +610,7 @@ async function loadData() {
 
     aY=null; aS=null; aM=null; pg=1;
     buildFilters(); apply();
+    setTimeout(initDrag, 100); // após render completo
   } catch(e) { alert('Erro ao carregar: ' + e.message); }
   show(false);
 }
@@ -806,7 +807,7 @@ function rMeta() {
   const metas=window._metas||{};
   const sports=Object.keys(metas);
   const metaSection=document.getElementById('meta-section');
-  if(!sports.length){metaSection.style.display='none';return;}
+  if(!metaSection||!sports.length){if(metaSection)metaSection.style.display='none';return;}
   metaSection.style.display='block';
   const anoAtual=new Date().getFullYear();
   document.getElementById('meta-ano').textContent=`· ${anoAtual}`;
