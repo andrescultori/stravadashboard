@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Strava Dashboard · André Scultori</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FF6B35'/%3E%3Ctext y='.9em' font-size='72' x='12' fill='white'%3E🏃%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23FF6B35'/%3E%3Ctext y='.88em' font-size='130' x='15' fill='white'%3E🏃%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3XMQoAIAhGYS/Vqbz/bNAmITRUf9ATnN83qlkx4S12b9U6Gl3G3IxPCEU8If4GKOMAAAAAAAAAAAAAAAyA/CoG8MRvqPyOO3/lIjlC7PVjAAAAAElFTkSuQmCC">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAACfUlEQVR4nO3SS24bQRAFwbmUT+X7r2l4YYGQaJsafqo7EQ+IfaGQx7HYLj9/XNjLdDOjm34+gn940w9lHdMtnt7041jfdKN3bfpJ7Ge62Zubfgr7m274Y9OPoEPIJImZHDGTI2ZyxEyOmMkRMzliJkfM5AiaFDGTI2ZyBE2KmMkRNCliJkfQpAiaFDGTI2hSBE2KmMkRNCmCJkXQpAiaFEGTImhSBE2KmEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAialOP3po+AZxE0KYImRdCkCJoUQZMiaFIETcrxZ9OHwKOO600fA48SNCnH500fBGd9iVnQ7EzQpNwMWtTs6K8xC5od/TNoUbOT/8YsaHZyV9CiZgd3xyxqVvftmAXNyk4FLWpWdDpmUbOah2MWNat4WsyiZtrTYxY1U14Ws6h5t5fHLGre5W0xi5pXe3vMwuYVRkO+3vQj2N90wzc3/RT2M93sXZt+EuubbvT0ph/HOqZbfPqmH0o74l8qRbpM+9tb9gAAAABJRU5ErkJggg==">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Strava Dash">
@@ -40,7 +40,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .topbar-links{display:flex;gap:10px;margin-top:2px}
 .tl{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s}
 .tl:hover{color:var(--orange)}
-.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+@media(max-width:640px){
+  .btn-strava span,.btn-strava-text{display:none}
+  .btn-strava{padding:5px 8px;min-width:32px;justify-content:center}
+  .strava-sep{display:none}
+  .topbar-links{display:none}
+}
 .btn-t{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s,color .15s}
 .btn-t:hover{border-color:var(--orange);color:var(--orange)}
 .btn-theme{background:var(--surf2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 9px;font-size:15px;cursor:pointer;line-height:1;transition:border-color .15s}
@@ -259,15 +265,15 @@ tbody td{padding:8px 13px;white-space:nowrap}
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn-strava" onclick="stravaAction('sincronizar')" id="btn-sync" title="Importar novas atividades do Strava">
+      <button class="btn-strava" onclick="stravaAction('sincronizar')" id="btn-sync" title="Sincronizar atividades do Strava">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-        Sincronizar
+        <span class="btn-strava-text">Sincronizar</span>
       </button>
-      <button class="btn-strava" onclick="stravaAction('reprocessar')" id="btn-reproc" title="Preencher campos vazios nas atividades existentes">
-        🔄 Reprocessar
+      <button class="btn-strava" onclick="stravaAction('reprocessar')" id="btn-reproc" title="Reprocessar atividades existentes">
+        🔄 <span class="btn-strava-text">Reprocessar</span>
       </button>
       <div class="strava-sep"></div>
-      <button class="btn-private" onclick="togglePrivate()" id="btn-private" title="Mostrar/ocultar atividades privadas">🔒 Privadas</button>
+      <button class="btn-private" onclick="togglePrivate()" id="btn-private" title="Mostrar/ocultar atividades privadas">🔒 <span class="btn-strava-text">Privadas</span></button>
       <div class="strava-sep"></div>
       <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema">🌙</button>
       <button class="btn-t" onclick="loadData()">↻ Atualizar</button>
@@ -1015,10 +1021,9 @@ function togglePrivate() {
   apply();
 }
 
-// ── DRAG AND DROP ─────────────────────────────────────────────────────────────
+// ── DRAG AND DROP (mouse + touch) ────────────────────────────────────────────
 function initDrag() {
   const main = document.querySelector('.main');
-  let dragged = null;
 
   // Restore saved order
   const saved = JSON.parse(localStorage.getItem('dash-order') || '[]');
@@ -1029,44 +1034,86 @@ function initDrag() {
     });
   }
 
-  // Add IDs and listeners to sections
+  // Assign IDs
   document.querySelectorAll('.main > .section').forEach(sec => {
-    const handle = sec.querySelector('.drag-handle');
     const sid = sec.querySelector('[id^="sec-"]')?.id.replace('sec-','') || '';
     if (sid) sec.id = 'section-' + sid;
+  });
 
+  let dragged = null, clone = null, startY = 0, offsetY = 0;
+
+  function getOrder() {
+    return [...document.querySelectorAll('.main > .section')]
+      .map(s => s.id.replace('section-',''))
+      .filter(Boolean);
+  }
+
+  function saveOrder() {
+    localStorage.setItem('dash-order', JSON.stringify(getOrder()));
+  }
+
+  function getSectionAt(y) {
+    return [...document.querySelectorAll('.main > .section')].find(s => {
+      if (s === dragged) return false;
+      const r = s.getBoundingClientRect();
+      return y >= r.top && y <= r.bottom;
+    });
+  }
+
+  document.querySelectorAll('.main > .section').forEach(sec => {
+    const handle = sec.querySelector('.drag-handle');
     if (!handle) return;
 
-    handle.addEventListener('mousedown', () => { sec.draggable = true; });
-    handle.addEventListener('mouseup',   () => { sec.draggable = false; });
-
-    sec.addEventListener('dragstart', e => {
+    // ── MOUSE ──
+    handle.addEventListener('mousedown', e => {
+      e.preventDefault();
       dragged = sec;
-      setTimeout(() => sec.classList.add('dragging'), 0);
+      dragged.classList.add('dragging');
+
+      function onMove(e) {
+        const over = getSectionAt(e.clientY);
+        if (over) {
+          const mid = over.getBoundingClientRect().top + over.getBoundingClientRect().height / 2;
+          main.insertBefore(dragged, e.clientY < mid ? over : over.nextSibling);
+        }
+      }
+      function onUp() {
+        dragged.classList.remove('dragging');
+        dragged = null;
+        saveOrder();
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+      }
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
     });
-    sec.addEventListener('dragend', () => {
-      sec.classList.remove('dragging');
-      sec.draggable = false;
+
+    // ── TOUCH ──
+    handle.addEventListener('touchstart', e => {
+      e.preventDefault();
+      dragged = sec;
+      dragged.classList.add('dragging');
+      startY = e.touches[0].clientY;
+    }, {passive:false});
+
+    handle.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if (!dragged) return;
+      const y = e.touches[0].clientY;
+      const over = getSectionAt(y);
+      if (over) {
+        const mid = over.getBoundingClientRect().top + over.getBoundingClientRect().height / 2;
+        main.insertBefore(dragged, y < mid ? over : over.nextSibling);
+      }
+    }, {passive:false});
+
+    handle.addEventListener('touchend', () => {
+      if (!dragged) return;
+      dragged.classList.remove('dragging');
       dragged = null;
       saveOrder();
     });
-    sec.addEventListener('dragover', e => {
-      e.preventDefault();
-      if (dragged && dragged !== sec) {
-        const rect   = sec.getBoundingClientRect();
-        const midY   = rect.top + rect.height / 2;
-        const before = e.clientY < midY;
-        main.insertBefore(dragged, before ? sec : sec.nextSibling);
-      }
-    });
   });
-}
-
-function saveOrder() {
-  const order = [...document.querySelectorAll('.main > .section')]
-    .map(s => s.id.replace('section-', ''))
-    .filter(Boolean);
-  localStorage.setItem('dash-order', JSON.stringify(order));
 }
 
 // ── STRAVA ACTIONS ────────────────────────────────────────────────────────────
