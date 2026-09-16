@@ -51,6 +51,18 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .strava-sep{width:1px;height:20px;background:var(--border)}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text);z-index:300;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.3);transform:translateY(80px);opacity:0;transition:all .3s}
 .toast.show{transform:translateY(0);opacity:1}
+/* DRAG AND DROP */
+.section{margin-bottom:16px;transition:opacity .2s}
+.section.dragging{opacity:.4;cursor:grabbing}
+.section.drag-over{border-top:2px solid var(--orange)}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
+.drag-handle{cursor:grab;color:var(--dim);font-size:14px;padding:2px 4px;user-select:none;flex-shrink:0}
+.drag-handle:hover{color:var(--muted)}
+.drag-handle:active{cursor:grabbing}
+/* PRIVATE TOGGLE */
+.btn-private{background:var(--surf2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:5px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-private:hover{border-color:var(--border);color:var(--text)}
+.btn-private.active{background:rgba(248,81,73,.15);border-color:var(--red);color:var(--red)}
 
 /* ── FILTERS ── */
 .filters-bar{background:var(--surf);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
@@ -255,6 +267,8 @@ tbody td{padding:8px 13px;white-space:nowrap}
         🔄 Reprocessar
       </button>
       <div class="strava-sep"></div>
+      <button class="btn-private" onclick="togglePrivate()" id="btn-private" title="Mostrar/ocultar atividades privadas">🔒 Privadas</button>
+      <div class="strava-sep"></div>
       <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema">🌙</button>
       <button class="btn-t" onclick="loadData()">↻ Atualizar</button>
     </div>
@@ -280,6 +294,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- ÚLTIMA ATIVIDADE -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Última atividade</span>
         <button class="btn-collapse" onclick="toggleSection('last')">👁 Ocultar</button>
       </div>
@@ -291,6 +306,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- HERO -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Totais</span>
         <button class="btn-collapse" onclick="toggleSection('hero')">👁 Ocultar</button>
       </div>
@@ -327,6 +343,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- RECORDS -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Records pessoais</span>
         <button class="btn-collapse" onclick="toggleSection('records')">👁 Ocultar</button>
       </div>
@@ -338,6 +355,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- BEST MONTH/YEAR -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Melhores períodos</span>
         <button class="btn-collapse" onclick="toggleSection('best')">👁 Ocultar</button>
       </div>
@@ -352,6 +370,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- METAS -->
     <div class="section" id="meta-section" style="display:none">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Metas anuais <span id="meta-ano" style="font-weight:400"></span></span>
         <button class="btn-collapse" onclick="toggleSection('meta')">👁 Ocultar</button>
       </div>
@@ -363,6 +382,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- STREAK -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Sequência</span>
         <button class="btn-collapse" onclick="toggleSection('streak')">👁 Ocultar</button>
       </div>
@@ -385,6 +405,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- GRÁFICOS MENSAIS -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Evolução mensal</span>
         <button class="btn-collapse" onclick="toggleSection('monthly')">👁 Ocultar</button>
       </div>
@@ -399,6 +420,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- COMPARATIVO ANO A ANO -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Comparativo ano a ano</span>
         <button class="btn-collapse" onclick="toggleSection('yoy')">👁 Ocultar</button>
       </div>
@@ -410,6 +432,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- GRÁFICOS ANUAIS -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Análise anual</span>
         <button class="btn-collapse" onclick="toggleSection('annual')">👁 Ocultar</button>
       </div>
@@ -425,6 +448,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- HORÁRIO + PACE MENSAL -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Padrões</span>
         <button class="btn-collapse" onclick="toggleSection('patterns')">👁 Ocultar</button>
       </div>
@@ -439,6 +463,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- TOP PISTAS + GEAR -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Pistas e equipamentos</span>
         <button class="btn-collapse" onclick="toggleSection('gear')">👁 Ocultar</button>
       </div>
@@ -453,6 +478,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- TABLE -->
     <div class="section">
       <div class="section-header">
+        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
         <span class="section-title">Registro de atividades</span>
         <button class="btn-collapse" onclick="toggleSection('table')">👁 Ocultar</button>
       </div>
@@ -492,6 +518,7 @@ const PSZ     = 25;
 
 let all=[],fil=[];
 let aY=null,aS=null,aM=null,pg=1;
+let showPrivate=true;
 let CH={};
 
 const ICO  = {Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊',WeightTraining:'🏋',Workout:'💪'};
@@ -556,7 +583,7 @@ function updateCollapseBtn(id, collapsed) {
 }
 
 // ── LOAD ──────────────────────────────────────────────────────────────────────
-window.onload = () => { initTheme(); initCollapse(); loadData(); };
+window.onload = () => { initTheme(); initCollapse(); initDrag(); loadData(); };
 
 async function loadData() {
   show(true);
@@ -617,6 +644,7 @@ function parse(rows) {
       paceS, paceStr:paceS>=60&&paceS<3600?fp(paceS):'—',
       avgHr:f(12), gear:g(14), city:g(16),
       elev:f(17), cal:f(18), name:g(19), link:g(22),
+      private: g(21).toLowerCase().includes('privado'),
     };
   }).filter(a=>a.date&&a.distKm>0).sort((a,b)=>b.date-a.date);
 }
@@ -664,6 +692,7 @@ function apply() {
     if(aY&&a.year!==aY)return false;
     if(aS&&a.sport!==aS)return false;
     if(aM&&a.month!==aM)return false;
+    if(!showPrivate&&a.private)return false;
     return true;
   });
   render();
@@ -968,6 +997,77 @@ function co({tip,click}={}) {
 function dc(id,cfg){if(CH[id]){CH[id].destroy();delete CH[id];}CH[id]=new Chart(document.getElementById(id),cfg);}
 function show(v){document.getElementById('loading').style.display=v?'flex':'none';}
 
+// ── PRIVATE TOGGLE ────────────────────────────────────────────────────────────
+function togglePrivate() {
+  showPrivate = !showPrivate;
+  const btn = document.getElementById('btn-private');
+  if (showPrivate) {
+    btn.textContent = '🔒 Privadas';
+    btn.classList.remove('active');
+    toast('Atividades privadas visíveis', 'info', 2500);
+  } else {
+    btn.textContent = '🔒 Ocultando privadas';
+    btn.classList.add('active');
+    const n = all.filter(a=>a.private).length;
+    toast(`${n} atividade(s) privada(s) ocultada(s)`, 'info', 2500);
+  }
+  apply();
+}
+
+// ── DRAG AND DROP ─────────────────────────────────────────────────────────────
+function initDrag() {
+  const main = document.querySelector('.main');
+  let dragged = null;
+
+  // Restore saved order
+  const saved = JSON.parse(localStorage.getItem('dash-order') || '[]');
+  if (saved.length) {
+    saved.forEach(id => {
+      const el = document.getElementById('section-' + id);
+      if (el) main.appendChild(el);
+    });
+  }
+
+  // Add IDs and listeners to sections
+  document.querySelectorAll('.main > .section').forEach(sec => {
+    const handle = sec.querySelector('.drag-handle');
+    const sid = sec.querySelector('[id^="sec-"]')?.id.replace('sec-','') || '';
+    if (sid) sec.id = 'section-' + sid;
+
+    if (!handle) return;
+
+    handle.addEventListener('mousedown', () => { sec.draggable = true; });
+    handle.addEventListener('mouseup',   () => { sec.draggable = false; });
+
+    sec.addEventListener('dragstart', e => {
+      dragged = sec;
+      setTimeout(() => sec.classList.add('dragging'), 0);
+    });
+    sec.addEventListener('dragend', () => {
+      sec.classList.remove('dragging');
+      sec.draggable = false;
+      dragged = null;
+      saveOrder();
+    });
+    sec.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (dragged && dragged !== sec) {
+        const rect   = sec.getBoundingClientRect();
+        const midY   = rect.top + rect.height / 2;
+        const before = e.clientY < midY;
+        main.insertBefore(dragged, before ? sec : sec.nextSibling);
+      }
+    });
+  });
+}
+
+function saveOrder() {
+  const order = [...document.querySelectorAll('.main > .section')]
+    .map(s => s.id.replace('section-', ''))
+    .filter(Boolean);
+  localStorage.setItem('dash-order', JSON.stringify(order));
+}
+
 // ── STRAVA ACTIONS ────────────────────────────────────────────────────────────
 const WEB_APP = 'https://script.google.com/macros/s/AKfycbyUG44b-RT-WbD8YfNx9SsVEaFk236-DvZJld97kVWoBCkRxTIIonB2mgcWGHl47-Y/exec';
 
@@ -982,7 +1082,7 @@ async function stravaAction(acao) {
 
   btn.classList.add('loading');
   btn.textContent = lbl.loading;
-  toast('🔄 ' + lbl.loading, 'info');
+  toast(lbl.loading, 'info');
 
   try {
     const r = await fetch(`${WEB_APP}?acao=${acao}`, {method:'GET', mode:'no-cors'});
