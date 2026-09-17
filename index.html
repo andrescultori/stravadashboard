@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Strava Dashboard · André Scultori</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAUUlEQVR42u3XIQ4AIAwEwX6KV/F/fRgEIWmCAK5ixekd2YakSNebri1pvI0eYP7HN4QnviB88TkA1jgAAAAAAAAAAAAAjtJCAPtnVOI3NH3HAzjjisbQEMpmAAAAAElFTkSuQmCC">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAD+0lEQVR42u3dS04kMRBF0dwUq+r9j6vFtIUQRefHcX0svXkSdQhcTtscx+Lj9efjJWvlMIAFHmABHGKBG2QBG2TJw/YBSQa2D0USqH0QkoGt+JJBreiSQa3YkkGtyJJBrbiSQa2okkGtmJJBrYiSQq2AkgGteJJBrWiSQq1gkgGtWJJCrVCSAa1IkkKtQJIBrTgL5HOowzmoFeYBvD8d6gV0AjLYvwOtKItDBvs91AoyCDPUQOcwQw10DjPUX4NWDKBTqBViMGaogQYaaFkZM9RAAw20AA000EADDTTQvwWtCBHMUAOtQwMtQAMNNNBAAw000EADrQj2cgAtQAMN9YqYY78MQO8KOtrlgd7tTGF86gL0Lqe+N5mLA12/l2OzL5hAV29O2nTFBOgpsO/+KwC0PAraujbQY0C7lQnoPOizwMZQAz0N9NmdF2h5ZP585RQihBpoG5dS82mg7fFIdWmg7e9IoQa6hPnq5wJaxr0EGY4a6Mmgn3o+oOVU0E8/H9AybhfcUNRATwC94nMCLZdtGX3iWYEGeeRRKHNoOWXOvOrPYNkOZJfGAL33GrM6Ar3liW6Jg151zRZooEd8G3eOD+jEeqmDqUAn3mq5FhfoZeawU45MQQn0pajvuCoAZqAvubTlqi2eQAP9WJe++94LoIG+DPUV81+ggb4d9ZVf5GAGOrXEBjTQmRcgphtAp15NAw106soAmIFObbYHGujMaWvTDaDHvU3UnYHeYlce0EDnDgIADfQj92TsfpkM0KI7Aw000EADLUBPWu9WL6B1ZwEaaKAFaKBhBhpo3VmABlqABhpoMX8GGmiggQZagAZagJ5/XlGAXvJUudoB7ZoEAXpVzFADncMMNdBJ0FADncIMNdA5zFADPWITEtRA594IQg107vU21EAn9ztDDXRu85FuDXRuJx3UQOeOVkENdG6fM9RA5zbtQw107hQ31EDnjlRBDXTufCDUQOcujIEa6NzpbaCBzl1FADTQOThAA53rhFADnfuzDjTQqTkq0EADDTTQq0IxjwY6hwRooIHeCPTngBpooHVpzwo00Lo00JAADbRpxwtooHVpoE07PCvQujTQF4KG2jw6hRno8LRjI9hA79KlN0EN9G6g46iPfwfQw6YdZ/4Pl+HYj68GzJt06WAXBxroPmioh007/Gu57zEDPXAFQYf+HjTUw1YQdOcD6BLqzVc5jp8OoActi226Dn28M4D+mPWFa8OXKse7A+phc1SYoc4ui4Vfcx//M3Roy2Ip0Lo00CnM26O2+aeHGWrdN4cZaphzmKGGOYfZF0Vz4hxmqCWHGWrJYQZbcpChliRmsCUHGWxJQgZbkpDhliRiwAG+a/wFBoX7v2v/GZAAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAtUlEQVR42uWXawqAQAiEvUYUdK/uf4+ChaIoRytn7bHgn0WYD8d9KAJW1zZjVIh3RYqehqkhrkLUFN9BZIhvIH4HMA59iQKQJT7HNwHWJUYANAs8AEsTssts7QvbY6sydIBZUIOSaJ+PRFG+RHqsiaJ8YTcZEqcBeKt1CQD5imxRH6MaAPA1fBUAajDLawqAdfOFAniOXgiAVlbr4kkD8Jx1+p/wMQCpv+JbAOmT0SNmw6zpeAJJJKGFXjdO/gAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAELklEQVR42u3dW24TQRRFUU8DgcS8mP88gvjNy9ju7jr31LK0fwncXjhpd1Xldgt//fr5401Z3bxghR5gAQ6ywAZZYIOsetgukCpguyCqge0iqAa14asGtaGrBrVhqwa1IasGteGqBrWhqga1YaoGtSGqBrXhqQq1wakGtKGpCrWBqQa0YakKtUGpBrQhqQq1AakGtOGoCrXBqAa0oagKtYEIaAlo6WTQhqEq1AahlN7+/P4Q0BqP+KuAVg3m/0ENtEZhvocaaI3D/B1qoDUS81eogRbQUgLmT0EbsiaDfo8aaAEtAS0BLaCBFtBSyefQBiygVb+ueALoT9dyuPj7vQO2LkwCeuNv543vzkDb+TEO9N0dKyDse7PVsKAfaKBHgX541zcI9ucBrZrPdtv+swENNNDaYwf1xB+FgAYaaO1xJMDEG1WggQZanavXGm5UgQY6CvSrXxNooE9DDbTiDm6Z9tQSaKBPgQW0akCv/M4ANNBAqxv0K8BW34gCDTPQ6gf9DLSEz76BBhpo7QH6EXApTyeBBnoZ6DNmAjTMh8ADWkt2eJ8BL2m5KtAHgWoGfe/fB3TxO+OEMziOBJi25QvooefGAQ10DegjEKX8GUA7ZuuQvwvQQFeBfhVk6pEJQA88M24q6CuuFdADj9lK+MgNaKAjv1skPW0EesMjthKe8gENdPTNaQtmoC+42EAD7cy4BZ+2NGAGuhz05M22QG9wZlziFqq0Xx0H9KDz4oAGGuiSgx+BLjsA8aqvOxkz0MXHazXdDAMNdNVn70AXnRUHNNB158WtWI89ETPQDkAEGuZ80I27dIAefrQW0EADvXj9CNAF+waBzsEM9ADQE9ZgJ11HoMN3PyfvNk+8lkAfgHIX0BMC+gA0QANddYhM0tYooIGOBT3xSR3QJWfWJYD24+PmoFeekww00FWgzzjVCGigowECDfTSJ3ArD1GEGejoX28GNNDL10cADXQV6PSPAYEGesmjag9UgI5ZjrniySPIQEetYQYa6Krz4YAGuu58OKCBrgTthhDoiuO0vDsDHb3ZFGigtwZ95bEIQMN82bs00EDXgHZDCHTV2XAwAx290RRooKtAn40aYKDjfzc30OGgr7gxSkYCdAnoaZDPRALzcNAwAw000EAngp6K+eqzlYEGevQNFtBAAw0z0KlAgAa6CvSRswH3G9D/Xh6mAA10Cer0dSUwh4CegHrKYimgQ0ALaKCBBhpooAX0ONRmBzTQQAvo4aCh3m+vYzVmoIEGWqM37wItoCeBhjobtXk9iBnoXNBm9SRoqDNRm9OTmIHOQm02B4CGWlWYgVYdaKhVhRlo1YGGWlWYgVYdaKhVhRlq1WGGWnWYoVYdZqhVhxlq1WGGWnWYoVYdZqhVhxlq1WEGW3WQwVYlZLBVCRlsVUIGW5WQAQf4qtdfBENEZxdL2swAAAAASUVORK5CYII=">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Strava Dash">
@@ -34,7 +34,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 /* ── TOPBAR ── */
 .topbar{background:var(--surf);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
-.topbar-logo{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.topbar-logo{width:32px;height:32px;border-radius:8px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .topbar-title{font-size:15px;font-weight:700}
 .topbar-title span{color:var(--orange)}
 .topbar-links{display:flex;gap:10px;margin-top:2px}
@@ -263,7 +263,14 @@ tbody td{padding:8px 13px;white-space:nowrap}
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-left">
-      <div class="topbar-logo">🏃</div>
+      <div class="topbar-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32">
+          <rect width="512" height="512" rx="112" fill="#1C1B19"/>
+          <polyline points="72,392 168,392 226,232 284,432 342,152 400,280 472,120"
+            fill="none" stroke="#FF5A1F" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="472" cy="120" r="30" fill="#FF5A1F"/>
+        </svg>
+      </div>
       <div>
         <div class="topbar-title">Strava Dashboard · <span>André Scultori</span></div>
         <div class="topbar-links">
