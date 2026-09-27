@@ -111,6 +111,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .last-act-date{font-size:12px;color:var(--muted)}
 .last-act-ago{font-size:11px;color:var(--orange);font-weight:600;margin-top:2px}
 .last-act-stats{display:flex;gap:20px;flex-wrap:wrap;row-gap:10px}
+.last-act-row{display:flex;gap:20px}
 .last-act-stat{text-align:right}
 .last-act-stat-val{font-size:18px;font-weight:800;letter-spacing:-.02em}
 .last-act-stat-lbl{font-size:10px;color:var(--muted);margin-top:1px}
@@ -255,7 +256,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
   .cg1,.cg2,.cg3{grid-template-columns:1fr}
   .records-grid{grid-template-columns:repeat(2,1fr)}
   .last-act{grid-template-columns:auto 1fr;gap:12px}
-  .last-act-stats{grid-column:1/-1;margin-top:4px}
+  .last-act-stats{grid-column:1/-1;flex-direction:column;gap:10px;margin-top:4px}
 }
 @media(max-width:480px){.main{padding:12px}.hkpi{padding:18px 20px}.topbar{padding:10px 14px}}
 
@@ -772,6 +773,7 @@ function nsp(v) {
 function fp(s)   { if(!s||s<=0||s>=3600)return'—'; return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`; }
 function ftt(s)  { const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return`${h}h ${String(m).padStart(2,'0')}m ${String(sec).padStart(2,'0')}s`; }
 function fdur(s) { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60); return h>0?`${h}h${m>0?' '+m+'m':''}`:m+'m'; }
+function fdurS(s) { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?`${h}h${m}m${sec}s`:`${m}m${sec}s`; }
 function fhms(s) { if(!s)return'—'; const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60); return h>0?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`; }
 function fdist(km) { if(km>=10000)return`${(km/1000).toFixed(1)}K`; if(km>=1000)return`${(km/1000).toFixed(1)}K`; return km.toFixed(0); }
 
@@ -829,6 +831,18 @@ function rLast() {
   const paceOrVel = isRide
     ? `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.velKmh>0?a.velKmh.toFixed(1)+'<span style="font-size:12px;color:var(--muted)"> km/h</span>':'—'}</div><div class="last-act-stat-lbl">Velocidade</div></div>`
     : `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</div><div class="last-act-stat-lbl">Pace</div></div>`;
+  const row1 = `
+        <div class="last-act-stat">
+          <div class="last-act-stat-val" style="color:var(--orange)">${a.distKm.toFixed(2)}<span style="font-size:12px;color:var(--muted)"> km</span></div>
+          <div class="last-act-stat-lbl">Distância</div>
+        </div>
+        <div class="last-act-stat">
+          <div class="last-act-stat-val" style="color:var(--blue)">${fdurS(a.durS)}</div>
+          <div class="last-act-stat-lbl">Tempo</div>
+        </div>
+        ${paceOrVel}`;
+  const row2Items = `${a.avgHr>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--purple)">${Math.round(a.avgHr)}<span style="font-size:12px;color:var(--muted)"> bpm</span></div><div class="last-act-stat-lbl">BPM médio</div></div>`:''}${a.elev>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--yellow)">${a.elev.toFixed(0)}<span style="font-size:12px;color:var(--muted)"> m</span></div><div class="last-act-stat-lbl">Elevação</div></div>`:''}${a.link?`<div class="last-act-stat"><a class="sl" href="${a.link}" target="_blank" title="Ver no Strava">🔗</a><div class="last-act-stat-lbl">Strava</div></div>`:''}`;
+  const row2 = row2Items?`<div class="last-act-row">${row2Items}</div>`:'';
 
   document.getElementById('last-act-card').innerHTML = `
     <div class="last-act">
@@ -839,18 +853,8 @@ function rLast() {
         <div class="last-act-ago">Sua última atividade foi ${agoStr}.</div>
       </div>
       <div class="last-act-stats">
-        <div class="last-act-stat">
-          <div class="last-act-stat-val" style="color:var(--orange)">${a.distKm.toFixed(2)}<span style="font-size:12px;color:var(--muted)"> km</span></div>
-          <div class="last-act-stat-lbl">Distância</div>
-        </div>
-        <div class="last-act-stat">
-          <div class="last-act-stat-val" style="color:var(--blue)">${fdur(a.durS)}</div>
-          <div class="last-act-stat-lbl">Tempo</div>
-        </div>
-        ${paceOrVel}
-        ${a.avgHr>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--purple)">${Math.round(a.avgHr)}<span style="font-size:12px;color:var(--muted)"> bpm</span></div><div class="last-act-stat-lbl">BPM médio</div></div>`:''}
-        ${a.elev>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--yellow)">${a.elev.toFixed(0)}<span style="font-size:12px;color:var(--muted)"> m</span></div><div class="last-act-stat-lbl">Elevação</div></div>`:''}
-        ${a.link?`<div class="last-act-stat"><a class="sl" href="${a.link}" target="_blank" title="Ver no Strava">🔗</a><div class="last-act-stat-lbl">Strava</div></div>`:''}
+        <div class="last-act-row">${row1}</div>
+        ${row2}
       </div>
     </div>`;
 }
