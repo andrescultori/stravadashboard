@@ -314,7 +314,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
 </head>
 <body>
 
-<div id="loading"><div class="sp"></div><div class="sp-t">Carregando atividades...</div></div>
+<div id="loading"><div class="sp"></div><div class="sp-t" data-i18n="loading">Carregando atividades...</div></div>
 
 <div id="app">
   <!-- TOPBAR -->
@@ -336,18 +336,19 @@ tbody td{padding:8px 13px;white-space:nowrap}
       </div>
     </div>
     <div class="topbar-right">
-      <button class="btn-strava" onclick="stravaAction('sincronizar')" id="btn-sync" title="Sincronizar atividades do Strava">
+      <button class="btn-strava" onclick="stravaAction('sincronizar')" id="btn-sync" title="Sincronizar atividades do Strava" data-i18n-title="syncTitle">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-        Sincronizar
+        <span data-i18n="sync">Sincronizar</span>
       </button>
-      <button class="btn-strava" onclick="stravaAction('reprocessar')" id="btn-reproc" title="Reprocessar atividades existentes">
-        🔄 Reprocessar
+      <button class="btn-strava" onclick="stravaAction('reprocessar')" id="btn-reproc" title="Reprocessar atividades existentes" data-i18n-title="reprocTitle">
+        <span data-i18n="reproc">🔄 Reprocessar</span>
       </button>
       <div class="strava-sep"></div>
-      <button class="btn-private" onclick="togglePrivate()" id="btn-private" title="Mostrar/ocultar atividades privadas">🔒 Privadas</button>
+      <button class="btn-private" onclick="togglePrivate()" id="btn-private" title="Mostrar/ocultar atividades privadas" data-i18n-title="privateTitle">🔒 Privadas</button>
       <div class="strava-sep"></div>
-      <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema">🌙</button>
-      <button class="btn-t" onclick="loadData()">↻ Atualizar</button>
+      <button class="btn-theme" onclick="toggleTheme()" id="btn-theme" title="Alternar tema" data-i18n-title="themeTitle">🌙</button>
+      <button class="btn-theme" onclick="toggleLang()" id="btn-lang" title="Change language / Mudar idioma">EN</button>
+      <button class="btn-t" onclick="loadData()" data-i18n="refresh">↻ Atualizar</button>
       <button class="btn-hamburger" onclick="openMenu()" title="Menu">☰</button>
     </div>
 
@@ -358,31 +359,31 @@ tbody td{padding:8px 13px;white-space:nowrap}
       <div class="mobile-menu-title">Strava</div>
       <button class="mobile-menu-btn" onclick="stravaAction('sincronizar');closeMobileMenu()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-        Sincronizar atividades
+        <span data-i18n="menuSyncAct">Sincronizar atividades</span>
       </button>
       <button class="mobile-menu-btn" onclick="stravaAction('reprocessar');closeMobileMenu()">
-        🔄 Reprocessar atividades
+        <span data-i18n="menuReprocAct">🔄 Reprocessar atividades</span>
       </button>
       <div class="mobile-menu-sep"></div>
       <div class="mobile-menu-title">Dashboard</div>
       <button class="mobile-menu-btn" id="menu-btn-private" onclick="togglePrivate();closeMobileMenu()">
-        🔒 Atividades privadas
+        <span data-i18n="menuPrivateAct">🔒 Atividades privadas</span>
       </button>
       <button class="mobile-menu-btn" onclick="toggleTheme();closeMobileMenu()">
-        <span id="menu-theme-icon">☀️</span> Alternar tema
+        <span id="menu-theme-icon">☀️</span> <span data-i18n="menuTheme">Alternar tema</span>
       </button>
       <button class="mobile-menu-btn" onclick="loadData();closeMobileMenu()">
-        ↻ Atualizar dados
+        <span data-i18n="menuRefresh">↻ Atualizar dados</span>
       </button>
       <div class="mobile-menu-sep"></div>
       <div class="mobile-menu-title">Links</div>
       <a href="https://www.strava.com/athletes/13751526" target="_blank" class="mobile-menu-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-        Perfil no Strava
+        <span data-i18n="menuStravaProfile">Perfil no Strava</span>
       </a>
       <a href="https://github.com/andrescultori/stravadashboard" target="_blank" class="mobile-menu-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-        Repositório GitHub
+        <span data-i18n="menuGithubRepo">Repositório GitHub</span>
       </a>
     </div>
   </div>
@@ -396,10 +397,10 @@ tbody td{padding:8px 13px;white-space:nowrap}
 
   <!-- FILTERS -->
   <div class="filters-bar">
-    <span class="fl">Ano</span>
+    <span class="fl" data-i18n="filterYear">Ano</span>
     <div id="yc" style="display:flex;gap:6px;flex-wrap:wrap"></div>
     <div class="fsep"></div>
-    <span class="fl">Tipo</span>
+    <span class="fl" data-i18n="filterType">Tipo</span>
     <div id="sc" style="display:flex;gap:6px;flex-wrap:wrap"></div>
   </div>
 
@@ -408,8 +409,8 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- ÚLTIMA ATIVIDADE -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Última atividade</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secLast">Última atividade</span>
         <button class="btn-collapse" onclick="toggleSection('last')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-last">
@@ -420,8 +421,8 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- HERO -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Totais</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secTotals">Totais</span>
         <button class="btn-collapse" onclick="toggleSection('hero')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-hero">
@@ -429,27 +430,27 @@ tbody td{padding:8px 13px;white-space:nowrap}
           <div class="hkpi dist">
             <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--orange)"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
             <div><span class="hkpi-val" id="h-dist">—</span><span class="hkpi-unit">km</span></div>
-            <div class="hkpi-lbl">Distância total percorrida</div>
+            <div class="hkpi-lbl" data-i18n="hkpiDist">Distância total percorrida</div>
             <div class="hkpi-sub" id="h-dist-sub"></div>
           </div>
           <div class="hkpi time">
             <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--blue)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div class="hkpi-val" id="h-time">—</div>
-            <div class="hkpi-lbl">Tempo total em movimento</div>
+            <div class="hkpi-lbl" data-i18n="hkpiTime">Tempo total em movimento</div>
             <div class="hkpi-sub" id="h-time-sub"></div>
           </div>
           <div class="hkpi acts">
             <div class="hkpi-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;color:var(--green)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <div><span class="hkpi-val" id="h-acts">—</span></div>
-            <div class="hkpi-lbl">Atividades registradas</div>
+            <div class="hkpi-lbl" data-i18n="hkpiActs">Atividades registradas</div>
             <div class="hkpi-sub" id="h-acts-sub"></div>
           </div>
         </div>
         <div class="kpi-row">
           <div class="kc"><div class="kc-lbl" id="k-pace-lbl">Pace médio</div><div class="kc-val" id="k-pace" style="color:var(--green)">—</div><div class="kc-sub" id="k-pace-sub">min/km · corridas e caminhadas</div></div>
-          <div class="kc"><div class="kc-lbl">Dias ativos</div><div class="kc-val" id="k-days" style="color:var(--blue)">—</div><div class="kc-sub" id="k-days-sub">dias com atividade</div></div>
-          <div class="kc"><div class="kc-lbl">Elevação</div><div class="kc-val" id="k-elev" style="color:var(--yellow)">—</div><div class="kc-sub">metros acumulados</div></div>
-          <div class="kc"><div class="kc-lbl">Calorias</div><div class="kc-val" id="k-cal" style="color:var(--purple)">—</div><div class="kc-sub">kcal queimadas</div></div>
+          <div class="kc"><div class="kc-lbl" data-i18n="kcDaysLbl">Dias ativos</div><div class="kc-val" id="k-days" style="color:var(--blue)">—</div><div class="kc-sub" id="k-days-sub">dias com atividade</div></div>
+          <div class="kc"><div class="kc-lbl" data-i18n="kcElevLbl">Elevação</div><div class="kc-val" id="k-elev" style="color:var(--yellow)">—</div><div class="kc-sub" data-i18n="kcElevSub">metros acumulados</div></div>
+          <div class="kc"><div class="kc-lbl" data-i18n="kcCalLbl">Calorias</div><div class="kc-val" id="k-cal" style="color:var(--purple)">—</div><div class="kc-sub" data-i18n="kcCalSub">kcal queimadas</div></div>
         </div>
       </div>
     </div>
@@ -457,26 +458,26 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- RECORDS -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Recordes pessoais</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secRecords">Recordes pessoais</span>
         <button class="btn-collapse" onclick="toggleSection('records')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-records">
-        <div class="cc"><div class="ch"><div class="ct">🏆 Recordes pessoais</div><div class="chi">melhores tempos por distância</div></div><div class="records-grid" id="records-grid"></div></div>
+        <div class="cc"><div class="ch"><div class="ct">🏆 Recordes pessoais</div><div class="chi" data-i18n="recordsChi">melhores tempos por distância</div></div><div class="records-grid" id="records-grid"></div></div>
       </div>
     </div>
 
     <!-- BEST MONTH/YEAR -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Melhores períodos</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secBest">Melhores períodos</span>
         <button class="btn-collapse" onclick="toggleSection('best')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-best">
         <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">📅 Melhor mês</div><div class="chi" id="best-month-label"></div></div><div id="best-month-content"></div></div>
-          <div class="cc"><div class="ch"><div class="ct">📆 Melhor ano</div><div class="chi" id="best-year-label"></div></div><div id="best-year-content"></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="bestMonth">📅 Melhor mês</div><div class="chi" id="best-month-label"></div></div><div id="best-month-content"></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="bestYear">📆 Melhor ano</div><div class="chi" id="best-year-label"></div></div><div id="best-year-content"></div></div>
         </div>
       </div>
     </div>
@@ -484,32 +485,32 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- METAS -->
     <div class="section" id="meta-section" style="display:none">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Metas anuais <span id="meta-ano" style="font-weight:400"></span></span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title"><span data-i18n="secGoals">Metas anuais</span> <span id="meta-ano" style="font-weight:400"></span></span>
         <button class="btn-collapse" onclick="toggleSection('meta')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-meta">
-        <div class="cc"><div class="ch"><div class="ct">🎯 Progresso</div><div class="chi">configure na aba CONFIG da planilha</div></div><div id="meta-items"></div></div>
+        <div class="cc"><div class="ch"><div class="ct" data-i18n="goalsProgress">🎯 Progresso</div><div class="chi" data-i18n="goalsChi">configure na aba CONFIG da planilha</div></div><div id="meta-items"></div></div>
       </div>
     </div>
 
     <!-- STREAK -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Sequência</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secStreak">Sequência</span>
         <button class="btn-collapse" onclick="toggleSection('streak')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-streak">
         <div class="streak-grid">
           <div class="streak-card">
             <div class="streak-num" id="streak-cur" style="color:var(--orange)">—</div>
-            <div class="streak-lbl">Sequência atual</div>
+            <div class="streak-lbl" data-i18n="streakCur">Sequência atual</div>
             <div class="streak-sub" id="streak-cur-sub">dias consecutivos</div>
           </div>
           <div class="streak-card">
             <div class="streak-num" id="streak-max" style="color:var(--yellow)">—</div>
-            <div class="streak-lbl">Melhor sequência</div>
+            <div class="streak-lbl" data-i18n="streakBest">Melhor sequência</div>
             <div class="streak-sub" id="streak-max-sub">recorde histórico</div>
           </div>
         </div>
@@ -519,14 +520,14 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- GRÁFICOS MENSAIS -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Evolução mensal</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secMonthly">Evolução mensal</span>
         <button class="btn-collapse" onclick="toggleSection('monthly')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-monthly">
         <div class="cg1" id="grid-monthly">
-          <div class="cc"><div class="ch"><div class="ct">Distância por mês (km)</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-mo"></canvas></div></div>
-          <div class="cc" id="card-sp"><div class="ch"><div class="ct">Por tipo de atividade</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-sp"></canvas></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="chartMonthlyDist">Distância por mês (km)</div><div class="chi" data-i18n="clickToFilter">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-mo"></canvas></div></div>
+          <div class="cc" id="card-sp"><div class="ch"><div class="ct" data-i18n="chartBySport">Por tipo de atividade</div><div class="chi" data-i18n="clickToFilter">clique para filtrar</div></div><div style="position:relative;height:210px"><canvas id="c-sp"></canvas></div></div>
         </div>
       </div>
     </div>
@@ -534,27 +535,27 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- COMPARATIVO ANO A ANO -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Comparativo ano a ano</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secYoy">Comparativo ano a ano</span>
         <button class="btn-collapse" onclick="toggleSection('yoy')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-yoy">
-        <div class="cc"><div class="ch"><div class="ct">Acúmulo de km por mês (ano a ano)</div><div class="chi">compara o ritmo entre anos</div></div><div style="position:relative;height:240px"><canvas id="c-yoy"></canvas></div></div>
+        <div class="cc"><div class="ch"><div class="ct" data-i18n="chartYoyAccum">Acúmulo de km por mês (ano a ano)</div><div class="chi" data-i18n="yoyChi">compara o ritmo entre anos</div></div><div style="position:relative;height:240px"><canvas id="c-yoy"></canvas></div></div>
       </div>
     </div>
 
     <!-- GRÁFICOS ANUAIS -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Análise anual</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secAnnual">Análise anual</span>
         <button class="btn-collapse" onclick="toggleSection('annual')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-annual">
         <div class="cg2" id="grid-annual">
-          <div class="cc" id="card-an"><div class="ch"><div class="ct">Distância anual (km)</div><div class="chi">clique para filtrar</div></div><div style="position:relative;height:170px"><canvas id="c-an"></canvas></div></div>
+          <div class="cc" id="card-an"><div class="ch"><div class="ct" data-i18n="chartAnnualDist">Distância anual (km)</div><div class="chi" data-i18n="clickToFilter">clique para filtrar</div></div><div style="position:relative;height:170px"><canvas id="c-an"></canvas></div></div>
           <div class="cc"><div class="ch"><div class="ct" id="pa-title">Pace médio por ano</div></div><div style="position:relative;height:170px"><canvas id="c-pa"></canvas></div></div>
-          <div class="cc"><div class="ch"><div class="ct">BPM médio por ano</div></div><div style="position:relative;height:170px"><canvas id="c-hr"></canvas></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="chartAvgHrYear">BPM médio por ano</div></div><div style="position:relative;height:170px"><canvas id="c-hr"></canvas></div></div>
         </div>
       </div>
     </div>
@@ -562,13 +563,13 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- HORÁRIO + PACE MENSAL -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Padrões</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secPatterns">Padrões</span>
         <button class="btn-collapse" onclick="toggleSection('patterns')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-patterns">
         <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">Distribuição por horário</div><div class="chi">quando você mais se exercita</div></div><div style="position:relative;height:200px"><canvas id="c-hour"></canvas></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="chartHourDist">Distribuição por horário</div><div class="chi" data-i18n="hourChi">quando você mais se exercita</div></div><div style="position:relative;height:200px"><canvas id="c-hour"></canvas></div></div>
           <div class="cc"><div class="ch"><div class="ct" id="pace-mo-title">Evolução do pace mensal</div><div class="chi" id="pace-month-label">dentro do ano filtrado</div></div><div style="position:relative;height:200px"><canvas id="c-pace-mo"></canvas></div></div>
         </div>
       </div>
@@ -577,14 +578,14 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- TOP PISTAS + GEAR -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Pistas e equipamentos</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secGear">Pistas e equipamentos</span>
         <button class="btn-collapse" onclick="toggleSection('gear')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-gear">
         <div class="cg3">
-          <div class="cc"><div class="ch"><div class="ct">📍 Top pistas</div><div class="chi">por número de corridas</div></div><div class="pista-list" id="pista-list"></div></div>
-          <div class="cc"><div class="ch"><div class="ct">👟 Top gear</div><div class="chi">por distância acumulada</div></div><div class="gear-list" id="gear-list"></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="chartTopTracks">📍 Top pistas</div><div class="chi" data-i18n="tracksChi">por número de corridas</div></div><div class="pista-list" id="pista-list"></div></div>
+          <div class="cc"><div class="ch"><div class="ct" data-i18n="chartTopGear">👟 Top gear</div><div class="chi" data-i18n="gearChi">por distância acumulada</div></div><div class="gear-list" id="gear-list"></div></div>
         </div>
       </div>
     </div>
@@ -592,23 +593,23 @@ tbody td{padding:8px 13px;white-space:nowrap}
     <!-- TABLE -->
     <div class="section">
       <div class="section-header">
-        <span class="drag-handle" title="Arrastar para reorganizar">⠿</span>
-        <span class="section-title">Registro de atividades</span>
+        <span class="drag-handle" title="Arrastar para reorganizar" data-i18n-title="dragHint">⠿</span>
+        <span class="section-title" data-i18n="secTable">Registro de atividades</span>
         <button class="btn-collapse" onclick="toggleSection('table')">👁 Ocultar</button>
       </div>
       <div class="section-body" id="sec-table">
         <div class="tcard">
-          <div class="th"><div class="tt">Atividades</div><div class="tm" id="t-meta"></div></div>
+          <div class="th"><div class="tt" data-i18n="tableActs">Atividades</div><div class="tm" id="t-meta"></div></div>
           <div style="overflow-x:auto">
             <table>
-              <thead><tr><th>Data</th><th>Tipo</th><th>Nome</th><th>Dist</th><th>Tempo</th><th>Pace</th><th>BPM</th><th>Elev</th><th>Cidade</th><th>Gear</th><th>Link</th></tr></thead>
+              <thead><tr><th data-i18n="thDate">Data</th><th data-i18n="thType">Tipo</th><th data-i18n="thName">Nome</th><th data-i18n="thDist">Dist</th><th data-i18n="thTime">Tempo</th><th data-i18n="thPace">Pace</th><th data-i18n="thBpm">BPM</th><th data-i18n="thElev">Elev</th><th data-i18n="thCity">Cidade</th><th data-i18n="thGear">Gear</th><th data-i18n="thLink">Link</th></tr></thead>
               <tbody id="t-body"></tbody>
             </table>
           </div>
           <div class="pg">
-            <button class="pg-btn" id="pg-p" onclick="changePage(-1)" disabled>‹ Anterior</button>
+            <button class="pg-btn" id="pg-p" onclick="changePage(-1)" disabled data-i18n="prevPage">‹ Anterior</button>
             <span class="pg-info" id="pg-i"></span>
-            <button class="pg-btn" id="pg-n" onclick="changePage(1)">Próxima ›</button>
+            <button class="pg-btn" id="pg-n" onclick="changePage(1)" data-i18n="nextPage">Próxima ›</button>
           </div>
         </div>
       </div>
@@ -618,7 +619,7 @@ tbody td{padding:8px 13px;white-space:nowrap}
 
   <div class="footer">
     <div class="footer-text">
-      Desenvolvido por <a href="https://github.com/andrescultori" target="_blank">André Scultori</a>
+      <span data-i18n="footerBy">Desenvolvido por</span> <a href="https://github.com/andrescultori" target="_blank">André Scultori</a>
       &nbsp;·&nbsp; © 2026
       &nbsp;·&nbsp; <a href="https://github.com/andrescultori/stravadashboard" target="_blank">GitHub</a>
     </div>
@@ -638,7 +639,152 @@ let CH={};
 const ICO  = {Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊',WeightTraining:'🏋',Workout:'💪'};
 const COL  = {Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF',WeightTraining:'#F0C040',Workout:'#F0C040'};
 const YPAL = ['#6366f1','#f97316','#22c55e','#ec4899','#14b8a6','#eab308','#3b82f6','#a78bfa','#f43f5e','#8b5cf6','#64748b'];
-const MO_PT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+let LANG = localStorage.getItem('dash-lang') || 'pt';
+
+const I18N = {
+  pt: {
+    loading:'Carregando atividades...',
+    sync:'Sincronizar', syncTitle:'Sincronizar atividades do Strava',
+    reproc:'🔄 Reprocessar', reprocTitle:'Reprocessar atividades existentes',
+    privateBtn:'🔒 Privadas', privateHiding:'🔒 Ocultando privadas', privateTitle:'Mostrar/ocultar atividades privadas',
+    themeTitle:'Alternar tema', refresh:'↻ Atualizar', menuTitle:'Menu',
+    menuSyncAct:'Sincronizar atividades', menuReprocAct:'🔄 Reprocessar atividades',
+    menuPrivateAct:'🔒 Atividades privadas', menuTheme:'Alternar tema', menuRefresh:'↻ Atualizar dados',
+    menuStravaProfile:'Perfil no Strava', menuGithubRepo:'Repositório GitHub',
+    filterYear:'Ano', filterType:'Tipo', all:'Todos', dragHint:'Arrastar para reorganizar',
+    hide:'👁 Ocultar', show:'👁‍🗨 Mostrar',
+    secLast:'Última atividade', secTotals:'Totais', secRecords:'Recordes pessoais', secBest:'Melhores períodos',
+    secGoals:'Metas anuais', secStreak:'Sequência', secMonthly:'Evolução mensal', secYoy:'Comparativo ano a ano',
+    secAnnual:'Análise anual', secPatterns:'Padrões', secGear:'Pistas e equipamentos', secTable:'Registro de atividades',
+    hkpiDist:'Distância total percorrida', hkpiTime:'Tempo total em movimento', hkpiActs:'Atividades registradas',
+    kcDaysLbl:'Dias ativos', kcElevLbl:'Elevação', kcElevSub:'metros acumulados', kcCalLbl:'Calorias', kcCalSub:'kcal queimadas',
+    paceLbl:'Pace médio', speedLbl:'Velocidade média', paceSub:'min/km · corridas e caminhadas', speedSub:'km/h · pedaladas',
+    recordsChi:'melhores tempos por distância', bestMonth:'📅 Melhor mês', bestYear:'📆 Melhor ano',
+    goalsProgress:'🎯 Progresso', goalsChi:'configure na aba CONFIG da planilha',
+    streakCur:'Sequência atual', streakBest:'Melhor sequência',
+    chartMonthlyDist:'Distância por mês (km)', clickToFilter:'clique para filtrar', chartBySport:'Por tipo de atividade',
+    chartYoyAccum:'Acúmulo de km por mês (ano a ano)', yoyChi:'compara o ritmo entre anos',
+    chartAnnualDist:'Distância anual (km)', chartAvgPaceYear:'Pace médio por ano', chartAvgSpeedYear:'Velocidade média por ano',
+    chartAvgHrYear:'BPM médio por ano', chartHourDist:'Distribuição por horário', hourChi:'quando você mais se exercita',
+    chartPaceMo:'Evolução do pace mensal', chartSpeedMo:'Evolução da velocidade mensal',
+    chartTopTracks:'📍 Top pistas', tracksChi:'por número de corridas', chartTopGear:'👟 Top gear', gearChi:'por distância acumulada',
+    tableActs:'Atividades', thDate:'Data', thType:'Tipo', thName:'Nome', thDist:'Dist', thTime:'Tempo', thPace:'Pace',
+    thBpm:'BPM', thElev:'Elev', thCity:'Cidade', thGear:'Gear', thLink:'Link',
+    prevPage:'‹ Anterior', nextPage:'Próxima ›', footerBy:'Desenvolvido por',
+    today:'hoje', yesterday:'ontem', daysAgo:'há {n} dias', lastActWas:'Sua última atividade foi {ago}.',
+    statDist:'Distância', statTime:'Tempo', statPace:'Pace', statSpeed:'Velocidade', statHr:'BPM médio',
+    statElev:'Elevação', statStrava:'Strava', viewOnStrava:'Ver no Strava',
+    avgDistPerAct:'média {x} km por atividade', contDays:'{x} dias contínuos', inYear:'em {y}', fullHistory:'no histórico completo',
+    ofTotalDays:'de {n} no total', noRecord:'sem registro',
+    distHalf:'Meia 21k', distFull:'42k', distLongest:'Maior',
+    distanceRecordBadge:'🥇 Recorde de distância', statTotalTime:'Tempo total', statActiveDays:'Dias ativos', daysUnit:'dias',
+    actsSuffix:'{n} atividades',
+    goalDone:'✅ {x} km', goalLeft:'📍 faltam {x} km', goalTarget:'🎯 {x} km',
+    streakConsec:'dias consecutivos até hoje', streakLastAct:'última atividade: {d}', streakRecord:'recorde: {n} dias seguidos',
+    kmTip:' {x} km', actsTip:' {x} atividades',
+    tracksRuns:'{n} corridas', gearActs:'{n} atividades', gearPaceAvg:' · pace médio {x}/km',
+    tableMeta:'{n} atividades', pageInfo:'Página {p} de {t} · {n} atividades',
+    privateVisible:'Atividades privadas visíveis', privateHidden:'{n} atividade(s) privada(s) ocultada(s)',
+    syncLoading:'Sincronizando…', syncOk:'Sincronização iniciada! Aguarde alguns minutos e clique em Atualizar.', syncErr:'Erro ao sincronizar.',
+    reprocLoading:'Reprocessando…', reprocOk:'Reprocessamento iniciado! Aguarde alguns minutos e clique em Atualizar.', reprocErr:'Erro ao reprocessar.',
+    loadError:'Erro ao carregar: {msg}',
+    paceEvolInYear:'evolução do pace em {y}', speedEvolInYear:'evolução da velocidade em {y}', last24Months:'últimos 24 meses',
+    months:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+  },
+  en: {
+    loading:'Loading activities...',
+    sync:'Sync', syncTitle:'Sync activities from Strava',
+    reproc:'🔄 Reprocess', reprocTitle:'Reprocess existing activities',
+    privateBtn:'🔒 Private', privateHiding:'🔒 Hiding private', privateTitle:'Show/hide private activities',
+    themeTitle:'Toggle theme', refresh:'↻ Refresh', menuTitle:'Menu',
+    menuSyncAct:'Sync activities', menuReprocAct:'🔄 Reprocess activities',
+    menuPrivateAct:'🔒 Private activities', menuTheme:'Toggle theme', menuRefresh:'↻ Refresh data',
+    menuStravaProfile:'Strava profile', menuGithubRepo:'GitHub repository',
+    filterYear:'Year', filterType:'Type', all:'All', dragHint:'Drag to reorder',
+    hide:'👁 Hide', show:'👁‍🗨 Show',
+    secLast:'Last activity', secTotals:'Totals', secRecords:'Personal records', secBest:'Best periods',
+    secGoals:'Annual goals', secStreak:'Streak', secMonthly:'Monthly trend', secYoy:'Year-over-year comparison',
+    secAnnual:'Annual breakdown', secPatterns:'Patterns', secGear:'Tracks & gear', secTable:'Activity log',
+    hkpiDist:'Total distance covered', hkpiTime:'Total time moving', hkpiActs:'Activities logged',
+    kcDaysLbl:'Active days', kcElevLbl:'Elevation', kcElevSub:'meters climbed', kcCalLbl:'Calories', kcCalSub:'kcal burned',
+    paceLbl:'Average pace', speedLbl:'Average speed', paceSub:'min/km · runs & walks', speedSub:'km/h · rides',
+    recordsChi:'best times by distance', bestMonth:'📅 Best month', bestYear:'📆 Best year',
+    goalsProgress:'🎯 Progress', goalsChi:'set on the CONFIG tab of the sheet',
+    streakCur:'Current streak', streakBest:'Best streak',
+    chartMonthlyDist:'Distance per month (km)', clickToFilter:'click to filter', chartBySport:'By activity type',
+    chartYoyAccum:'Accumulated km by month (year over year)', yoyChi:'compares pace between years',
+    chartAnnualDist:'Annual distance (km)', chartAvgPaceYear:'Average pace per year', chartAvgSpeedYear:'Average speed per year',
+    chartAvgHrYear:'Average HR per year', chartHourDist:'Distribution by time of day', hourChi:'when you train the most',
+    chartPaceMo:'Monthly pace trend', chartSpeedMo:'Monthly speed trend',
+    chartTopTracks:'📍 Top tracks', tracksChi:'by number of runs', chartTopGear:'👟 Top gear', gearChi:'by accumulated distance',
+    tableActs:'Activities', thDate:'Date', thType:'Type', thName:'Name', thDist:'Dist', thTime:'Time', thPace:'Pace',
+    thBpm:'HR', thElev:'Elev', thCity:'City', thGear:'Gear', thLink:'Link',
+    prevPage:'‹ Previous', nextPage:'Next ›', footerBy:'Built by',
+    today:'today', yesterday:'yesterday', daysAgo:'{n} days ago', lastActWas:'Your last activity was {ago}.',
+    statDist:'Distance', statTime:'Time', statPace:'Pace', statSpeed:'Speed', statHr:'Avg HR',
+    statElev:'Elevation', statStrava:'Strava', viewOnStrava:'View on Strava',
+    avgDistPerAct:'average {x} km per activity', contDays:'{x} continuous days', inYear:'in {y}', fullHistory:'across full history',
+    ofTotalDays:'out of {n} total', noRecord:'no record yet',
+    distHalf:'Half 21k', distFull:'42k', distLongest:'Longest',
+    distanceRecordBadge:'🥇 Distance record', statTotalTime:'Total time', statActiveDays:'Active days', daysUnit:'days',
+    actsSuffix:'{n} activities',
+    goalDone:'✅ {x} km', goalLeft:'📍 {x} km left', goalTarget:'🎯 {x} km',
+    streakConsec:'consecutive days through today', streakLastAct:'last activity: {d}', streakRecord:'record: {n} days in a row',
+    kmTip:' {x} km', actsTip:' {x} activities',
+    tracksRuns:'{n} runs', gearActs:'{n} activities', gearPaceAvg:' · avg pace {x}/km',
+    tableMeta:'{n} activities', pageInfo:'Page {p} of {t} · {n} activities',
+    privateVisible:'Private activities visible', privateHidden:'{n} private activity(ies) hidden',
+    syncLoading:'Syncing…', syncOk:'Sync started! Wait a few minutes and click Refresh.', syncErr:'Error syncing.',
+    reprocLoading:'Reprocessing…', reprocOk:'Reprocessing started! Wait a few minutes and click Refresh.', reprocErr:'Error reprocessing.',
+    loadError:'Error loading: {msg}',
+    paceEvolInYear:'pace progress in {y}', speedEvolInYear:'speed progress in {y}', last24Months:'last 24 months',
+    months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  },
+};
+
+function t(key, vars) {
+  let s = (I18N[LANG] && I18N[LANG][key] !== undefined) ? I18N[LANG][key] : (I18N.pt[key] !== undefined ? I18N.pt[key] : key);
+  if (vars) Object.keys(vars).forEach(k => { s = s.replace(new RegExp('\\{'+k+'\\}','g'), vars[k]); });
+  return s;
+}
+
+function fdate(a) { return a && a.date ? a.date.toLocaleDateString(LANG==='pt'?'pt-BR':'en-US') : (a?a.dStr:''); }
+
+function relabelFilterChips() {
+  const allY = document.querySelector('#yc .chip:first-child');
+  if (allY) allY.textContent = t('all');
+  const allS = document.querySelector('#sc .chip:first-child');
+  if (allS) allS.textContent = t('all');
+}
+
+function relabelCollapseButtons() {
+  document.querySelectorAll('.section-body').forEach(body => {
+    const btn = body.closest('.section')?.querySelector('.btn-collapse');
+    if (btn) btn.textContent = body.classList.contains('hidden') ? t('show') : t('hide');
+  });
+}
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = t(el.getAttribute('data-i18n-title')); });
+  document.documentElement.lang = LANG==='pt' ? 'pt-BR' : 'en-US';
+  const btnLang = document.getElementById('btn-lang');
+  if (btnLang) btnLang.textContent = LANG==='pt' ? 'EN' : 'PT';
+  const btnPrivate = document.getElementById('btn-private');
+  if (btnPrivate) btnPrivate.textContent = showPrivate ? t('privateBtn') : t('privateHiding');
+  relabelFilterChips();
+  relabelCollapseButtons();
+}
+
+function initLang() { applyI18n(); }
+
+function toggleLang() {
+  LANG = LANG === 'pt' ? 'en' : 'pt';
+  localStorage.setItem('dash-lang', LANG);
+  applyI18n();
+  render();
+  closeMobileMenu();
+}
 const RM = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 // ── THEME ─────────────────────────────────────────────────────────────────────
@@ -694,7 +840,7 @@ function updateCollapseBtn(id, collapsed) {
   const sec = document.getElementById('sec-' + id);
   if (!sec) return;
   const btn = sec.parentElement.querySelector('.btn-collapse');
-  if (btn) btn.textContent = collapsed ? '👁‍🗨 Mostrar' : '👁 Ocultar';
+  if (btn) btn.textContent = collapsed ? t('show') : t('hide');
 }
 
 // ── AUTO-UPDATE ───────────────────────────────────────────────────────────────
@@ -716,7 +862,7 @@ function checkForUpdate() {
 }
 
 // ── LOAD ──────────────────────────────────────────────────────────────────────
-window.onload = () => { initTheme(); initCollapse(); loadData(); checkForUpdate(); };
+window.onload = () => { initTheme(); initCollapse(); initLang(); loadData(); checkForUpdate(); };
 
 async function loadData() {
   show(true);
@@ -744,7 +890,7 @@ async function loadData() {
     aY=null; aS=null; aM=null; pg=1;
     buildFilters(); apply();
     setTimeout(initDrag, 100); // após render completo
-  } catch(e) { alert('Erro ao carregar: ' + e.message); }
+  } catch(e) { alert(t('loadError', {msg: e.message})); }
   show(false);
 }
 
@@ -803,10 +949,10 @@ function buildFilters() {
   const years  = [...new Set(all.map(a=>a.year))].sort();
   const sports = [...new Set(all.map(a=>a.sport))].filter(Boolean);
   const yc=document.getElementById('yc'); yc.innerHTML='';
-  mkc(yc,'Todos',true,()=>sf('y',null));
+  mkc(yc,t('all'),true,()=>sf('y',null));
   years.forEach(y=>mkc(yc,String(y),false,()=>sf('y',y)));
   const sc=document.getElementById('sc'); sc.innerHTML='';
-  mkc(sc,'Todos',true,()=>sf('s',null));
+  mkc(sc,t('all'),true,()=>sf('s',null));
   sports.forEach(s=>mkc(sc,(ICO[s]||'🏅')+' '+s,false,()=>sf('s',s)));
 }
 
@@ -817,8 +963,8 @@ function sf(type,v) {
   if(type==='s')aS=v;
   if(type==='m')aM=v;
   pg=1;
-  if(type==='y')document.querySelectorAll('#yc .chip').forEach(b=>b.classList.toggle('active',b.textContent===(v?String(v):'Todos')));
-  if(type==='s')document.querySelectorAll('#sc .chip').forEach(b=>{const bs=b.textContent.replace(/^.\s/,'');b.classList.toggle('active',v===null?b.textContent==='Todos':bs===v);});
+  if(type==='y')document.querySelectorAll('#yc .chip').forEach(b=>b.classList.toggle('active',b.textContent===(v?String(v):t('all'))));
+  if(type==='s')document.querySelectorAll('#sc .chip').forEach(b=>{const bs=b.textContent.replace(/^.\s/u,'');b.classList.toggle('active',v===null?b.textContent===t('all'):bs===v);});
   apply();
 }
 
@@ -847,22 +993,22 @@ function rLast() {
   const a   = all[0];
   const now = new Date();
   const diff = Math.floor((now - a.date) / 86400000);
-  const agoStr = diff === 0 ? 'hoje' : diff === 1 ? 'ontem' : `há ${diff} dias`;
+  const agoStr = diff === 0 ? t('today') : diff === 1 ? t('yesterday') : t('daysAgo', {n: diff});
   const isRide = a.sport==='Ride';
   const paceOrVel = isRide
-    ? `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.velKmh>0?a.velKmh.toFixed(1)+'<span style="font-size:12px;color:var(--muted)"> km/h</span>':'—'}</div><div class="last-act-stat-lbl">Velocidade</div></div>`
-    : `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</div><div class="last-act-stat-lbl">Pace</div></div>`;
+    ? `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.velKmh>0?a.velKmh.toFixed(1)+'<span style="font-size:12px;color:var(--muted)"> km/h</span>':'—'}</div><div class="last-act-stat-lbl">${t('statSpeed')}</div></div>`
+    : `<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--green)">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</div><div class="last-act-stat-lbl">${t('statPace')}</div></div>`;
   const row1 = `
         <div class="last-act-stat">
           <div class="last-act-stat-val" style="color:var(--orange)">${a.distKm.toFixed(2)}<span style="font-size:12px;color:var(--muted)"> km</span></div>
-          <div class="last-act-stat-lbl">Distância</div>
+          <div class="last-act-stat-lbl">${t('statDist')}</div>
         </div>
         <div class="last-act-stat">
           <div class="last-act-stat-val" style="color:var(--blue)">${fdurS(a.durS)}</div>
-          <div class="last-act-stat-lbl">Tempo</div>
+          <div class="last-act-stat-lbl">${t('statTime')}</div>
         </div>
         ${paceOrVel}`;
-  const row2Items = `${a.avgHr>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--purple)">${Math.round(a.avgHr)}<span style="font-size:12px;color:var(--muted)"> bpm</span></div><div class="last-act-stat-lbl">BPM médio</div></div>`:''}${a.elev>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--yellow)">${a.elev.toFixed(0)}<span style="font-size:12px;color:var(--muted)"> m</span></div><div class="last-act-stat-lbl">Elevação</div></div>`:''}${a.link?`<div class="last-act-stat"><a class="sl" href="${a.link}" target="_blank" title="Ver no Strava">🔗</a><div class="last-act-stat-lbl">Strava</div></div>`:''}`;
+  const row2Items = `${a.avgHr>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--purple)">${Math.round(a.avgHr)}<span style="font-size:12px;color:var(--muted)"> bpm</span></div><div class="last-act-stat-lbl">${t('statHr')}</div></div>`:''}${a.elev>0?`<div class="last-act-stat"><div class="last-act-stat-val" style="color:var(--yellow)">${a.elev.toFixed(0)}<span style="font-size:12px;color:var(--muted)"> m</span></div><div class="last-act-stat-lbl">${t('statElev')}</div></div>`:''}${a.link?`<div class="last-act-stat"><a class="sl" href="${a.link}" target="_blank" title="${t('viewOnStrava')}">🔗</a><div class="last-act-stat-lbl">${t('statStrava')}</div></div>`:''}`;
   const row2 = row2Items?`<div class="last-act-row">${row2Items}</div>`:'';
 
   document.getElementById('last-act-card').innerHTML = `
@@ -870,8 +1016,8 @@ function rLast() {
       <div class="last-act-icon">${ICO[a.sport]||'🏅'}</div>
       <div>
         <div class="last-act-name">${a.name||a.sport}</div>
-        <div class="last-act-date">${a.dStr} · <span class="sb sb-${a.sport}">${a.sport}</span></div>
-        <div class="last-act-ago">Sua última atividade foi ${agoStr}.</div>
+        <div class="last-act-date">${fdate(a)} · <span class="sb sb-${a.sport}">${a.sport}</span></div>
+        <div class="last-act-ago">${t('lastActWas', {ago: agoStr})}</div>
       </div>
       <div class="last-act-stats">
         <div class="last-act-row">${row1}</div>
@@ -886,16 +1032,16 @@ function rHero() {
   const count=fil.length;
   document.getElementById('h-dist').textContent=fdist(dist);
   document.getElementById('h-time').textContent=ftt(sec);
-  document.getElementById('h-acts').textContent=count.toLocaleString('pt-BR');
-  document.getElementById('h-dist-sub').textContent=`média ${count?(dist/count).toFixed(1):0} km por atividade`;
-  document.getElementById('h-time-sub').textContent=`${(sec/86400).toFixed(1)} dias contínuos`;
-  document.getElementById('h-acts-sub').textContent=aY?`em ${aY}`:'no histórico completo';
+  document.getElementById('h-acts').textContent=count.toLocaleString(LANG==='pt'?'pt-BR':'en-US');
+  document.getElementById('h-dist-sub').textContent=t('avgDistPerAct',{x:count?(dist/count).toFixed(1):0});
+  document.getElementById('h-time-sub').textContent=t('contDays',{x:(sec/86400).toFixed(1)});
+  document.getElementById('h-acts-sub').textContent=aY?t('inYear',{y:aY}):t('fullHistory');
 }
 
 function rKpis() {
   const rideMode=aS==='Ride';
-  document.getElementById('k-pace-lbl').textContent=rideMode?'Velocidade média':'Pace médio';
-  document.getElementById('k-pace-sub').textContent=rideMode?'km/h · pedaladas':'min/km · corridas e caminhadas';
+  document.getElementById('k-pace-lbl').textContent=rideMode?t('speedLbl'):t('paceLbl');
+  document.getElementById('k-pace-sub').textContent=rideMode?t('speedSub'):t('paceSub');
   if(rideMode){
     const rides=fil.filter(a=>a.sport==='Ride'&&a.velKmh>0);
     document.getElementById('k-pace').textContent=rides.length?(rides.reduce((s,a)=>s+a.velKmh,0)/rides.length).toFixed(1):'—';
@@ -906,7 +1052,7 @@ function rKpis() {
   const dias=new Set(fil.map(a=>a.dayKey).filter(Boolean));
   document.getElementById('k-days').textContent=dias.size;
   const totalDias=new Set(all.map(a=>a.dayKey).filter(Boolean)).size;
-  document.getElementById('k-days-sub').textContent=`de ${totalDias} no total`;
+  document.getElementById('k-days-sub').textContent=t('ofTotalDays',{n:totalDias});
   const e=fil.reduce((s,a)=>s+a.elev,0);
   document.getElementById('k-elev').textContent=e>=1000?`${(e/1000).toFixed(1)}K`:Math.round(e)||'—';
   const c=fil.reduce((s,a)=>s+a.cal,0);
@@ -919,35 +1065,35 @@ function rRecords() {
     {label:'1 km',min:.9,max:1.5},
     {label:'5 km',min:4.5,max:6.0},
     {label:'10 km',min:9.0,max:11.5},
-    {label:'Meia 21k',min:19.5,max:22.5},
-    {label:'42k',min:40.0,max:44.0},
-    {label:'Maior',min:0,max:999,longest:true},
+    {label:t('distHalf'),min:19.5,max:22.5},
+    {label:t('distFull'),min:40.0,max:44.0},
+    {label:t('distLongest'),min:0,max:999,longest:true},
   ];
   document.getElementById('records-grid').innerHTML=dists.map(d=>{
     if(d.longest){
       const best=runs.length?runs.reduce((b,a)=>a.distKm>b.distKm?a:b):null;
       if(!best)return'';
-      return`<div class="record-item"><div class="record-dist">${best.distKm.toFixed(2)} km</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${best.dStr}</div></div>`;
+      return`<div class="record-item"><div class="record-dist">${best.distKm.toFixed(2)} km</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${fdate(best)}</div></div>`;
     }
     const cands=runs.filter(a=>a.distKm>=d.min&&a.distKm<=d.max);
-    if(!cands.length)return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div><div class="record-pace">sem registro</div></div>`;
+    if(!cands.length)return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time" style="color:var(--dim);font-size:14px">—</div><div class="record-pace">${t('noRecord')}</div></div>`;
     const best=cands.reduce((b,a)=>a.paceS<b.paceS?a:b);
-    return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${best.dStr}</div></div>`;
+    return`<div class="record-item"><div class="record-dist">${d.label}</div><div class="record-time">${fhms(best.durS)}</div><div class="record-pace">${best.paceStr}/km</div><div class="record-date">${fdate(best)}</div></div>`;
   }).join('');
 }
 
 function rBest() {
   const rideMode=aS==='Ride';
   const base=all.filter(a=>{if(aY&&a.year!==aY)return false;if(aS&&a.sport!==aS)return false;return true;});
-  const paceLbl=rideMode?'Velocidade média':'Pace médio';
+  const paceLbl=rideMode?t('speedLbl'):t('paceLbl');
   const byM={};
   base.forEach(a=>{if(!a.month)return;if(!byM[a.month])byM[a.month]={km:0,acts:0,sec:0,pS:0,pN:0,elev:0,vS:0,vN:0};byM[a.month].km+=a.distKm;byM[a.month].acts++;byM[a.month].sec+=a.durS;byM[a.month].elev+=a.elev;if(a.paceS>=60&&a.paceS<=1800){byM[a.month].pS+=a.paceS;byM[a.month].pN++;}if(a.velKmh>0){byM[a.month].vS+=a.velKmh;byM[a.month].vN++;}});
   const months=Object.entries(byM).sort((a,b)=>b[1].km-a[1].km);
   if(months.length){
     const[mk,md]=months[0];const[my,mn]=mk.split('-');
     const paceVal=rideMode?(md.vN?(md.vS/md.vN).toFixed(1)+' km/h':'—'):(md.pN?fp(md.pS/md.pN)+'/km':'—');
-    document.getElementById('best-month-label').textContent=`${MO_PT[+mn-1]}/${my}`;
-    document.getElementById('best-month-content').innerHTML=`<div class="best-badge">🥇 Recorde de distância</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">Distância</div><div class="best-stat-value" style="color:var(--orange)">${md.km.toFixed(1)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${md.acts} atividades</div></div><div class="best-stat"><div class="best-stat-label">Tempo total</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(md.sec)}</div></div><div class="best-stat"><div class="best-stat-label">Elevação</div><div class="best-stat-value" style="color:var(--yellow)">${Math.round(md.elev)}<span style="font-size:13px;color:var(--muted)"> m</span></div></div><div class="best-stat"><div class="best-stat-label">${paceLbl}</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${paceVal}</div></div></div>`;
+    document.getElementById('best-month-label').textContent=`${I18N[LANG].months[+mn-1]}/${my}`;
+    document.getElementById('best-month-content').innerHTML=`<div class="best-badge">${t('distanceRecordBadge')}</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">${t('statDist')}</div><div class="best-stat-value" style="color:var(--orange)">${md.km.toFixed(1)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${t('actsSuffix',{n:md.acts})}</div></div><div class="best-stat"><div class="best-stat-label">${t('statTotalTime')}</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(md.sec)}</div></div><div class="best-stat"><div class="best-stat-label">${t('statElev')}</div><div class="best-stat-value" style="color:var(--yellow)">${Math.round(md.elev)}<span style="font-size:13px;color:var(--muted)"> m</span></div></div><div class="best-stat"><div class="best-stat-label">${paceLbl}</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${paceVal}</div></div></div>`;
   }
   const byY={};
   base.forEach(a=>{if(!byY[a.year])byY[a.year]={km:0,acts:0,sec:0,pS:0,pN:0,days:new Set(),vS:0,vN:0};byY[a.year].km+=a.distKm;byY[a.year].acts++;byY[a.year].sec+=a.durS;if(a.dayKey)byY[a.year].days.add(a.dayKey);if(a.paceS>=60&&a.paceS<=1800){byY[a.year].pS+=a.paceS;byY[a.year].pN++;}if(a.velKmh>0){byY[a.year].vS+=a.velKmh;byY[a.year].vN++;}});
@@ -956,7 +1102,7 @@ function rBest() {
     const[yk,yd]=years[0];
     const paceVal=rideMode?(yd.vN?(yd.vS/yd.vN).toFixed(1)+' km/h':'—'):(yd.pN?fp(yd.pS/yd.pN)+'/km':'—');
     document.getElementById('best-year-label').textContent=yk;
-    document.getElementById('best-year-content').innerHTML=`<div class="best-badge">🥇 Recorde de distância</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">Distância</div><div class="best-stat-value" style="color:var(--orange)">${yd.km.toFixed(0)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${yd.acts} atividades</div></div><div class="best-stat"><div class="best-stat-label">Tempo total</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(yd.sec)}</div></div><div class="best-stat"><div class="best-stat-label">Dias ativos</div><div class="best-stat-value" style="color:var(--green)">${yd.days.size}<span style="font-size:13px;color:var(--muted)"> dias</span></div></div><div class="best-stat"><div class="best-stat-label">${paceLbl}</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${paceVal}</div></div></div>`;
+    document.getElementById('best-year-content').innerHTML=`<div class="best-badge">${t('distanceRecordBadge')}</div><div class="best-stat-grid"><div class="best-stat"><div class="best-stat-label">${t('statDist')}</div><div class="best-stat-value" style="color:var(--orange)">${yd.km.toFixed(0)}<span style="font-size:13px;color:var(--muted)"> km</span></div><div class="best-stat-sub">${t('actsSuffix',{n:yd.acts})}</div></div><div class="best-stat"><div class="best-stat-label">${t('statTotalTime')}</div><div class="best-stat-value" style="color:var(--blue);font-size:15px">${ftt(yd.sec)}</div></div><div class="best-stat"><div class="best-stat-label">${t('statActiveDays')}</div><div class="best-stat-value" style="color:var(--green)">${yd.days.size}<span style="font-size:13px;color:var(--muted)"> ${t('daysUnit')}</span></div></div><div class="best-stat"><div class="best-stat-label">${paceLbl}</div><div class="best-stat-value" style="color:var(--green);font-size:15px">${paceVal}</div></div></div>`;
   }
 }
 
@@ -977,7 +1123,7 @@ function rMeta() {
     const falta=Math.max(0,metaKm-feito).toFixed(1);
     const icon={Run:'🏃',Walk:'🚶',Ride:'🚴',Hike:'🥾',Swim:'🏊'}[sport]||'🏅';
     const cor={Run:'#FF6B35',Walk:'#39D353',Ride:'#58A6FF',Hike:'#BC8CFF',Swim:'#3DCFCF'}[sport]||'#FF6B35';
-    return`<div class="meta-item"><div class="meta-item-header"><div class="meta-item-sport">${icon} ${sport}</div><div class="meta-item-pct" style="color:${cor}">${pct.toFixed(1)}%</div></div><div class="meta-bar-bg"><div class="meta-bar-fill" style="width:${pct.toFixed(1)}%;background:${cor}"></div></div><div class="meta-info"><span>✅ ${feito.toFixed(1)} km</span><span>📍 faltam ${falta} km</span><span>🎯 ${metaKm} km</span></div></div>`;
+    return`<div class="meta-item"><div class="meta-item-header"><div class="meta-item-sport">${icon} ${sport}</div><div class="meta-item-pct" style="color:${cor}">${pct.toFixed(1)}%</div></div><div class="meta-bar-bg"><div class="meta-bar-fill" style="width:${pct.toFixed(1)}%;background:${cor}"></div></div><div class="meta-info"><span>${t('goalDone',{x:feito.toFixed(1)})}</span><span>${t('goalLeft',{x:falta})}</span><span>${t('goalTarget',{x:metaKm})}</span></div></div>`;
   }).join('');
 }
 
@@ -1009,17 +1155,17 @@ function rStreak() {
 
   document.getElementById('streak-cur').textContent=curStreak;
   document.getElementById('streak-max').textContent=maxStreak;
-  document.getElementById('streak-cur-sub').textContent=curStreak>0?`dias consecutivos até hoje`:`última atividade: ${lastDay}`;
-  document.getElementById('streak-max-sub').textContent=`recorde: ${maxStreak} dias seguidos`;
+  document.getElementById('streak-cur-sub').textContent=curStreak>0?t('streakConsec'):t('streakLastAct',{d:lastDay});
+  document.getElementById('streak-max-sub').textContent=t('streakRecord',{n:maxStreak});
 }
 
 function rMo() {
   const mo={};fil.forEach(a=>{if(a.month)mo[a.month]=(mo[a.month]||0)+a.distKm;});
   const lb=Object.keys(mo).sort().slice(-24);
   const vl=lb.map(m=>+mo[m].toFixed(1));
-  const sl=lb.map(m=>{const[y,n]=m.split('-');return MO_PT[+n-1]+'/'+y.slice(2);});
+  const sl=lb.map(m=>{const[y,n]=m.split('-');return I18N[LANG].months[+n-1]+'/'+y.slice(2);});
   dc('c-mo',{type:'bar',data:{labels:sl,datasets:[{data:vl,backgroundColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.3)'),borderColor:lb.map(m=>m===aM?'#FF6B35':'rgba(255,107,53,.6)'),borderWidth:1,borderRadius:4}]},
-    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} km`}},click:(e,el)=>{if(el.length){const m=lb[el[0].index];sf('m',aM===m?null:m);}}})});
+    options:co({tip:{callbacks:{label:c=>t('kmTip',{x:c.parsed.y.toFixed(1)})}},click:(e,el)=>{if(el.length){const m=lb[el[0].index];sf('m',aM===m?null:m);}}})});
 }
 
 function rSp() {
@@ -1046,7 +1192,7 @@ function rYoY() {
     const col=YPAL[i%YPAL.length];
     return{label:String(y),data:acc,borderColor:col,backgroundColor:col+'22',borderWidth:y===aY?3:1.5,pointRadius:y===aY?4:2,tension:.4,fill:false};
   });
-  dc('c-yoy',{type:'line',data:{labels:MO_PT,datasets},
+  dc('c-yoy',{type:'line',data:{labels:I18N[LANG].months,datasets},
     options:{responsive:true,maintainAspectRatio:false,
       animation:RM?{duration:0}:{duration:800,easing:'easeOutQuart',x:{from:0}},
       plugins:{legend:{position:'bottom',labels:{color:'#7D8590',font:{size:10},padding:8,boxWidth:12}},
@@ -1059,12 +1205,12 @@ function rAn() {
   const yr={};fil.forEach(a=>{yr[a.year]=(yr[a.year]||0)+a.distKm;});
   const lb=Object.keys(yr).sort();const vl=lb.map(y=>+yr[y].toFixed(1));
   dc('c-an',{type:'bar',data:{labels:lb,datasets:[{data:vl,backgroundColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]+'77'),borderColor:lb.map((y,i)=>+y===aY?'#FF6B35':YPAL[i%YPAL.length]),borderWidth:1,borderRadius:4}]},
-    options:co({tip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(0)} km`}},click:(e,el)=>{if(el.length){const y=+lb[el[0].index];sf('y',aY===y?null:y);}}})});
+    options:co({tip:{callbacks:{label:c=>t('kmTip',{x:c.parsed.y.toFixed(0)})}},click:(e,el)=>{if(el.length){const y=+lb[el[0].index];sf('y',aY===y?null:y);}}})});
 }
 
 function rPa() {
   const rideMode=aS==='Ride';
-  document.getElementById('pa-title').textContent=rideMode?'Velocidade média por ano':'Pace médio por ano';
+  document.getElementById('pa-title').textContent=rideMode?t('chartAvgSpeedYear'):t('chartAvgPaceYear');
   if(rideMode){
     const rides=fil.filter(a=>a.sport==='Ride'&&a.velKmh>0);
     const by={};rides.forEach(a=>{if(!by[a.year])by[a.year]={s:0,n:0};by[a.year].s+=a.velKmh;by[a.year].n++;});
@@ -1104,22 +1250,22 @@ function rHour() {
     return 'rgba(100,116,139,.4)';                   // madrugada
   });
   dc('c-hour',{type:'bar',data:{labels,datasets:[{data:counts,backgroundColor:colors,borderRadius:3}]},
-    options:{responsive:true,maintainAspectRatio:false,animation:RM?{duration:0}:{duration:800,easing:'easeOutQuart'},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y} atividades`}}},
+    options:{responsive:true,maintainAspectRatio:false,animation:RM?{duration:0}:{duration:800,easing:'easeOutQuart'},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>t('actsTip',{x:c.parsed.y})}}},
       scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:9},maxRotation:0},border:{color:'transparent'}},
         y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7D8590',font:{size:10}},border:{color:'transparent'}}}}});
 }
 
 function rPaceMo() {
   const rideMode=aS==='Ride';
-  document.getElementById('pace-mo-title').textContent=rideMode?'Evolução da velocidade mensal':'Evolução do pace mensal';
+  document.getElementById('pace-mo-title').textContent=rideMode?t('chartSpeedMo'):t('chartPaceMo');
   if(rideMode){
     const rides=fil.filter(a=>a.sport==='Ride'&&a.velKmh>0);
     const by={};
     rides.forEach(a=>{if(!by[a.month])by[a.month]={s:0,n:0};by[a.month].s+=a.velKmh;by[a.month].n++;});
     const lb=Object.keys(by).sort().slice(-24);
     const vl=lb.map(m=>+(by[m].s/by[m].n).toFixed(1));
-    const sl=lb.map(m=>{const[y,n]=m.split('-');return MO_PT[+n-1]+'/'+y.slice(2);});
-    const label=aY?`evolução da velocidade em ${aY}`:'últimos 24 meses';
+    const sl=lb.map(m=>{const[y,n]=m.split('-');return I18N[LANG].months[+n-1]+'/'+y.slice(2);});
+    const label=aY?t('speedEvolInYear',{y:aY}):t('last24Months');
     document.getElementById('pace-month-label').textContent=label;
     dc('c-pace-mo',{type:'line',data:{labels:sl,datasets:[{data:vl,borderColor:'#58A6FF',backgroundColor:'rgba(88,166,255,.08)',borderWidth:2,pointBackgroundColor:'#58A6FF',pointRadius:3,fill:true,tension:.4}]},
       options:{responsive:true,maintainAspectRatio:false,animation:RM?{duration:0}:{duration:800,easing:'easeOutQuart',x:{from:0}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(1)} km/h`}}},
@@ -1132,8 +1278,8 @@ function rPaceMo() {
   runs.forEach(a=>{if(!by[a.month])by[a.month]={s:0,n:0};by[a.month].s+=a.paceS;by[a.month].n++;});
   const lb=Object.keys(by).sort().slice(-24);
   const vl=lb.map(m=>by[m].s/by[m].n/60);
-  const sl=lb.map(m=>{const[y,n]=m.split('-');return MO_PT[+n-1]+'/'+y.slice(2);});
-  const label=aY?`evolução do pace em ${aY}`:'últimos 24 meses';
+  const sl=lb.map(m=>{const[y,n]=m.split('-');return I18N[LANG].months[+n-1]+'/'+y.slice(2);});
+  const label=aY?t('paceEvolInYear',{y:aY}):t('last24Months');
   document.getElementById('pace-month-label').textContent=label;
   dc('c-pace-mo',{type:'line',data:{labels:sl,datasets:[{data:vl,borderColor:'#39D353',backgroundColor:'rgba(57,211,83,.08)',borderWidth:2,pointBackgroundColor:'#39D353',pointRadius:3,fill:true,tension:.4}]},
     options:{responsive:true,maintainAspectRatio:false,animation:RM?{duration:0}:{duration:800,easing:'easeOutQuart',x:{from:0}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const m=Math.floor(c.parsed.y),s=Math.round((c.parsed.y%1)*60);return` ${m}:${String(s).padStart(2,'0')} min/km`;}}}},
@@ -1148,7 +1294,7 @@ function rPistas() {
     if(a.paceS>=60&&a.paceS<=1800){p[a.city].pS+=a.paceS;p[a.city].pN++;}
   });
   const sorted=Object.entries(p).sort((a,b)=>b[1].runs-a[1].runs).slice(0,8);
-  document.getElementById('pista-list').innerHTML=sorted.map(([n,d])=>`<div class="pista-item"><div class="pista-name">📍 ${n}</div><div class="pista-stats"><span class="pista-runs">${d.runs} corridas</span><span class="pista-km">${d.km.toFixed(1)} km</span>${d.pN?`<span class="pista-pace">${fp(d.pS/d.pN)}/km</span>`:''}</div></div>`).join('');
+  document.getElementById('pista-list').innerHTML=sorted.map(([n,d])=>`<div class="pista-item"><div class="pista-name">📍 ${n}</div><div class="pista-stats"><span class="pista-runs">${t('tracksRuns',{n:d.runs})}</span><span class="pista-km">${d.km.toFixed(1)} km</span>${d.pN?`<span class="pista-pace">${fp(d.pS/d.pN)}/km</span>`:''}</div></div>`).join('');
 }
 
 function rGear() {
@@ -1159,18 +1305,18 @@ function rGear() {
   });
   const sorted=Object.entries(g).sort((a,b)=>b[1].km-a[1].km).slice(0,6);
   const maxKm=sorted.length?sorted[0][1].km:1;
-  document.getElementById('gear-list').innerHTML=sorted.map(([n,d])=>`<div class="gear-item"><div class="gear-header"><div class="gear-name">👟 ${n}</div><div class="gear-km">${d.km.toFixed(0)} km</div></div><div class="gear-bar-bg"><div class="gear-bar-fill" style="width:${(d.km/maxKm*100).toFixed(0)}%"></div></div><div class="gear-sub">${d.runs} atividades${d.pN?` · pace médio ${fp(d.pS/d.pN)}/km`:''}</div></div>`).join('');
+  document.getElementById('gear-list').innerHTML=sorted.map(([n,d])=>`<div class="gear-item"><div class="gear-header"><div class="gear-name">👟 ${n}</div><div class="gear-km">${d.km.toFixed(0)} km</div></div><div class="gear-bar-bg"><div class="gear-bar-fill" style="width:${(d.km/maxKm*100).toFixed(0)}%"></div></div><div class="gear-sub">${t('gearActs',{n:d.runs})}${d.pN?t('gearPaceAvg',{x:fp(d.pS/d.pN)}):''}</div></div>`).join('');
 }
 
 function rTable() {
   const total=fil.length,pages=Math.max(1,Math.ceil(total/PSZ));
   pg=Math.min(pg,pages);
   const shown=fil.slice((pg-1)*PSZ,pg*PSZ);
-  document.getElementById('t-meta').textContent=`${total} atividades`;
-  document.getElementById('pg-i').textContent=`Página ${pg} de ${pages} · ${total} atividades`;
+  document.getElementById('t-meta').textContent=t('tableMeta',{n:total});
+  document.getElementById('pg-i').textContent=t('pageInfo',{p:pg,t:pages,n:total});
   document.getElementById('pg-p').disabled=pg<=1;
   document.getElementById('pg-n').disabled=pg>=pages;
-  document.getElementById('t-body').innerHTML=shown.map(a=>`<tr><td class="td-date">${a.dStr}</td><td><span class="sb sb-${a.sport}">${a.sport}</span></td><td style="color:var(--text);font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis">${a.name||a.sport}</td><td class="td-dist">${a.distKm.toFixed(2)} km</td><td style="color:var(--muted)">${fdur(a.durS)}</td><td class="td-pace">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</td><td class="td-hr">${a.avgHr>0?Math.round(a.avgHr)+' bpm':'—'}</td><td class="td-elev">${a.elev>0?a.elev.toFixed(0)+'m':'—'}</td><td class="td-city">${a.city||'—'}</td><td style="color:var(--muted);font-size:10px">${a.gear&&a.gear!=='Outro'?a.gear:'—'}</td><td>${a.link?`<a class="sl" href="${a.link}" target="_blank">🔗</a>`:''}</td></tr>`).join('');
+  document.getElementById('t-body').innerHTML=shown.map(a=>`<tr><td class="td-date">${fdate(a)}</td><td><span class="sb sb-${a.sport}">${a.sport}</span></td><td style="color:var(--text);font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis">${a.name||a.sport}</td><td class="td-dist">${a.distKm.toFixed(2)} km</td><td style="color:var(--muted)">${fdur(a.durS)}</td><td class="td-pace">${a.paceStr!=='—'?a.paceStr+'/km':'—'}</td><td class="td-hr">${a.avgHr>0?Math.round(a.avgHr)+' bpm':'—'}</td><td class="td-elev">${a.elev>0?a.elev.toFixed(0)+'m':'—'}</td><td class="td-city">${a.city||'—'}</td><td style="color:var(--muted);font-size:10px">${a.gear&&a.gear!=='Outro'?a.gear:'—'}</td><td>${a.link?`<a class="sl" href="${a.link}" target="_blank">🔗</a>`:''}</td></tr>`).join('');
 }
 
 function changePage(d){pg+=d;rTable();document.querySelector('.tcard').scrollIntoView({behavior:'smooth',block:'start'});}
@@ -1191,14 +1337,14 @@ function togglePrivate() {
   showPrivate = !showPrivate;
   const btn = document.getElementById('btn-private');
   if (showPrivate) {
-    btn.textContent = '🔒 Privadas';
+    btn.textContent = t('privateBtn');
     btn.classList.remove('active');
-    toast('Atividades privadas visíveis', 'info', 2500);
+    toast(t('privateVisible'), 'info', 2500);
   } else {
-    btn.textContent = '🔒 Ocultando privadas';
+    btn.textContent = t('privateHiding');
     btn.classList.add('active');
     const n = all.filter(a=>a.private).length;
-    toast(`${n} atividade(s) privada(s) ocultada(s)`, 'info', 2500);
+    toast(t('privateHidden', {n}), 'info', 2500);
   }
   apply();
 }
@@ -1305,8 +1451,8 @@ async function stravaAction(acao) {
   const btnId = acao === 'sincronizar' ? 'btn-sync' : 'btn-reproc';
   const btn   = document.getElementById(btnId);
   const labels = {
-    sincronizar: {loading:'Sincronizando…', ok:'Sincronização iniciada! Aguarde alguns minutos e clique em Atualizar.', err:'Erro ao sincronizar.'},
-    reprocessar: {loading:'Reprocessando…', ok:'Reprocessamento iniciado! Aguarde alguns minutos e clique em Atualizar.', err:'Erro ao reprocessar.'},
+    sincronizar: {loading:t('syncLoading'), ok:t('syncOk'), err:t('syncErr')},
+    reprocessar: {loading:t('reprocLoading'), ok:t('reprocOk'), err:t('reprocErr')},
   };
   const lbl = labels[acao];
 
@@ -1320,8 +1466,8 @@ async function stravaAction(acao) {
     setTimeout(() => {
       btn.classList.remove('loading');
       btn.innerHTML = acao === 'sincronizar'
-        ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg> Sincronizar'
-        : '🔄 Reprocessar';
+        ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg> ' + t('sync')
+        : t('reproc');
       toast(lbl.ok, 'ok', 6000);
     }, 1500);
   } catch(e) {
